@@ -1671,14 +1671,72 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'app',
     data: function data() {
+        var popupData = [{ id: '1', name: 'Nabil', yearBirth: '1995' }];
+
         return {
             months: ['January', 'February', 'March', 'April', 'Mei', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-            days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+            days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+
+            // modal data
+            isDatePopupShowing: false,
+            canCancel: ['escape', 'x', 'outside'],
+            daySelected: '',
+            monthSelected: '',
+
+            // Table Data
+            popupData: popupData,
+            isEmpty: false,
+            isBordered: false,
+            isStriped: false,
+            isNarrowed: false,
+            isLoading: false,
+            hasMobileCards: true
         };
+    },
+
+    methods: {
+        showDatePopup: function showDatePopup(day, month) {
+            this.daySelected = day;
+            this.monthSelected = month;
+            this.isDatePopupShowing = true;
+        }
     }
 });
 
@@ -1762,7 +1820,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.has-item-centered[data-v-bc42c88c] {\n  justify-content: center;\n}\n.bg-primary[data-v-bc42c88c] {\n  background-color: #00d1b2;\n}\n.bg-danger[data-v-bc42c88c] {\n  background-color: #ff3860;\n}\n.bg-danger[data-v-bc42c88c] {\n  background-color: #ffdd57;\n}\n.text-white[data-v-bc42c88c] {\n  color: #fff;\n}\n.component-root[data-v-bc42c88c] {\n  margin: 50px auto;\n}\n.column[data-v-bc42c88c],\nh2[data-v-bc42c88c] {\n  font-weight: bold;\n}\n.card[data-v-bc42c88c] {\n  min-height: 404px;\n}\n.date-5-row[data-v-bc42c88c] {\n  padding-bottom: 4.2rem;\n}\n.date-title[data-v-bc42c88c] {\n  padding: 10px 0;\n  width: 14.28%;\n}\n.date[data-v-bc42c88c] {\n  width: 14.28%;\n}\n.date-fill[data-v-bc42c88c] {\n  padding: 10px 0;\n  cursor: pointer;\n}\n.date-fill[data-v-bc42c88c]:hover {\n  background-color: #3273dc;\n  color: #fff;\n}\n.date-empty[data-v-bc42c88c] {\n  padding: 10px 0;\n  cursor: no-drop;\n  background-color: #dbdbdb;\n}\n", ""]);
+exports.push([module.i, "\n.has-item-centered[data-v-bc42c88c] {\n  justify-content: center;\n}\n.bg-primary[data-v-bc42c88c] {\n  background-color: #00d1b2;\n}\n.bg-danger[data-v-bc42c88c] {\n  background-color: #ff3860;\n}\n.bg-warning[data-v-bc42c88c] {\n  background-color: #ffdd57;\n}\n.text-white[data-v-bc42c88c] {\n  color: #fff;\n}\n.component-root[data-v-bc42c88c] {\n  margin: 50px auto;\n}\n.column[data-v-bc42c88c],\nh2[data-v-bc42c88c] {\n  font-weight: bold;\n}\n.card[data-v-bc42c88c] {\n  min-height: 418px;\n}\n.card .card-content[data-v-bc42c88c] {\n  padding: 0;\n  margin: 1.5rem;\n  border: 1px solid;\n}\n.date-5-row[data-v-bc42c88c] {\n  padding-bottom: 4.2rem;\n}\n.date-title[data-v-bc42c88c] {\n  padding: 10px 0;\n  width: 14.28%;\n  border: 1px solid;\n}\n.date[data-v-bc42c88c] {\n  width: 14.28%;\n  border: 1px solid;\n}\n.date-fill[data-v-bc42c88c] {\n  padding: 10px 0;\n  cursor: pointer;\n}\n.date-fill[data-v-bc42c88c]:hover {\n  background-color: #3273dc;\n  color: #fff;\n}\n.date-empty[data-v-bc42c88c] {\n  padding: 10px 0;\n  cursor: no-drop;\n  background-color: #dbdbdb;\n}\n.modal[data-v-bc42c88c] {\n  padding: 10px;\n}\n.modal .modal-card-head[data-v-bc42c88c] {\n  padding: 10px 0;\n}\n.modal .modal-card-body .column[data-v-bc42c88c] {\n  border-bottom: 1px solid #dbdbdb;\n  border-top: 1px solid #dbdbdb;\n}\n", ""]);
 
 // exports
 
@@ -19725,206 +19783,537 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "component-root container" }, [
-    _c("h2", { staticClass: "has-text-centered" }, [_vm._v("Calendar 2017")]),
-    _c("hr"),
-    _c(
-      "div",
-      { staticClass: "columns is-multiline is-gapless" },
-      _vm._l(_vm.months, function(month, i) {
-        return _c(
-          "div",
-          { staticClass: "column is-one-third has-text-centered" },
-          [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-header bg-primary" }, [
+  return _c(
+    "div",
+    { staticClass: "component-root container" },
+    [
+      _c("h2", { staticClass: "has-text-centered" }, [_vm._v("Calendar 2017")]),
+      _c("hr"),
+      _c(
+        "div",
+        { staticClass: "columns is-multiline is-gapless" },
+        _vm._l(_vm.months, function(month, i) {
+          return _c(
+            "div",
+            { staticClass: "column is-one-third has-text-centered" },
+            [
+              _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "card-header bg-primary" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "card-header-title has-item-centered text-white"
+                    },
+                    [_vm._v(_vm._s(month))]
+                  )
+                ]),
+                _c("div", { staticClass: "card-content" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "columns is-gapless is-multiline is-mobile"
+                    },
+                    [
+                      _vm._l(_vm.days, function(day) {
+                        return _c(
+                          "div",
+                          { staticClass: "has-text-centered date-title" },
+                          [_vm._v(_vm._s(day))]
+                        )
+                      }),
+                      _vm._l(31 + 4, function(date) {
+                        return i == 0
+                          ? _c(
+                              "div",
+                              { staticClass: "has-text-centered date" },
+                              [
+                                date > 0 && date <= 31
+                                  ? _c(
+                                      "div",
+                                      {
+                                        staticClass: "date-fill",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.showDatePopup(date, i)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(date))]
+                                    )
+                                  : date >= 31
+                                    ? _c("div", { staticClass: "date-empty" }, [
+                                        _vm._v(_vm._s(" "))
+                                      ])
+                                    : _c("div", { staticClass: "date-empty" }, [
+                                        _vm._v(_vm._s(" "))
+                                      ])
+                              ]
+                            )
+                          : _vm._e()
+                      }),
+                      _vm._l(28 + 7, function(date) {
+                        return i == 1
+                          ? _c(
+                              "div",
+                              { staticClass: "has-text-centered date" },
+                              [
+                                date - 3 > 0 && date <= 28 + 3
+                                  ? _c(
+                                      "div",
+                                      {
+                                        staticClass: "date-fill",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.showDatePopup(date - 3, i)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(date - 3))]
+                                    )
+                                  : date >= 28
+                                    ? _c("div", { staticClass: "date-empty" }, [
+                                        _vm._v(_vm._s(" "))
+                                      ])
+                                    : _c("div", { staticClass: "date-empty" }, [
+                                        _vm._v(_vm._s(" "))
+                                      ])
+                              ]
+                            )
+                          : _vm._e()
+                      }),
+                      _vm._l(31 + 4, function(date) {
+                        return i == 2
+                          ? _c(
+                              "div",
+                              { staticClass: "has-text-centered date" },
+                              [
+                                date - 3 > 0 && date <= 31 + 3
+                                  ? _c(
+                                      "div",
+                                      {
+                                        staticClass: "date-fill",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.showDatePopup(date - 3, i)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(date - 3))]
+                                    )
+                                  : date >= 31
+                                    ? _c("div", { staticClass: "date-empty" }, [
+                                        _vm._v(_vm._s(" "))
+                                      ])
+                                    : _c("div", { staticClass: "date-empty" }, [
+                                        _vm._v(_vm._s(" "))
+                                      ])
+                              ]
+                            )
+                          : _vm._e()
+                      }),
+                      _vm._l(30 + 12, function(date) {
+                        return i == 3
+                          ? _c(
+                              "div",
+                              { staticClass: "has-text-centered date" },
+                              [
+                                date - 6 > 0 && date <= 30 + 6
+                                  ? _c(
+                                      "div",
+                                      {
+                                        staticClass: "date-fill",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.showDatePopup(date - 6, i)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(date - 6))]
+                                    )
+                                  : date >= 30
+                                    ? _c("div", { staticClass: "date-empty" }, [
+                                        _vm._v(_vm._s(" "))
+                                      ])
+                                    : _c("div", { staticClass: "date-empty" }, [
+                                        _vm._v(_vm._s(" "))
+                                      ])
+                              ]
+                            )
+                          : _vm._e()
+                      }),
+                      _vm._l(31 + 4, function(date) {
+                        return i == 4
+                          ? _c(
+                              "div",
+                              { staticClass: "has-text-centered date" },
+                              [
+                                date - 1 > 0 && date <= 31 + 1
+                                  ? _c(
+                                      "div",
+                                      {
+                                        staticClass: "date-fill",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.showDatePopup(date - 1, i)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(date - 1))]
+                                    )
+                                  : date >= 31
+                                    ? _c("div", { staticClass: "date-empty" }, [
+                                        _vm._v(_vm._s(" "))
+                                      ])
+                                    : _c("div", { staticClass: "date-empty" }, [
+                                        _vm._v(_vm._s(" "))
+                                      ])
+                              ]
+                            )
+                          : _vm._e()
+                      }),
+                      _vm._l(30 + 5, function(date) {
+                        return i == 5
+                          ? _c(
+                              "div",
+                              { staticClass: "has-text-centered date" },
+                              [
+                                date - 4 > 0 && date <= 30 + 4
+                                  ? _c(
+                                      "div",
+                                      {
+                                        staticClass: "date-fill",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.showDatePopup(date - 4, i)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(date - 4))]
+                                    )
+                                  : date >= 30
+                                    ? _c("div", { staticClass: "date-empty" }, [
+                                        _vm._v(_vm._s(" "))
+                                      ])
+                                    : _c("div", { staticClass: "date-empty" }, [
+                                        _vm._v(_vm._s(" "))
+                                      ])
+                              ]
+                            )
+                          : _vm._e()
+                      }),
+                      _vm._l(31 + 11, function(date) {
+                        return i == 6
+                          ? _c(
+                              "div",
+                              { staticClass: "has-text-centered date" },
+                              [
+                                date - 6 > 0 && date <= 31 + 6
+                                  ? _c(
+                                      "div",
+                                      {
+                                        staticClass: "date-fill",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.showDatePopup(date - 6, i)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(date - 6))]
+                                    )
+                                  : date >= 31
+                                    ? _c("div", { staticClass: "date-empty" }, [
+                                        _vm._v(_vm._s(" "))
+                                      ])
+                                    : _c("div", { staticClass: "date-empty" }, [
+                                        _vm._v(_vm._s(" "))
+                                      ])
+                              ]
+                            )
+                          : _vm._e()
+                      }),
+                      _vm._l(31 + 4, function(date) {
+                        return i == 7
+                          ? _c(
+                              "div",
+                              { staticClass: "has-text-centered date" },
+                              [
+                                date - 2 > 0 && date <= 31 + 2
+                                  ? _c(
+                                      "div",
+                                      {
+                                        staticClass: "date-fill",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.showDatePopup(date - 2, i)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(date - 2))]
+                                    )
+                                  : date >= 31
+                                    ? _c("div", { staticClass: "date-empty" }, [
+                                        _vm._v(_vm._s(" "))
+                                      ])
+                                    : _c("div", { staticClass: "date-empty" }, [
+                                        _vm._v(_vm._s(" "))
+                                      ])
+                              ]
+                            )
+                          : _vm._e()
+                      }),
+                      _vm._l(30 + 5, function(date) {
+                        return i == 8
+                          ? _c(
+                              "div",
+                              { staticClass: "has-text-centered date" },
+                              [
+                                date - 5 > 0 && date <= 30 + 5
+                                  ? _c(
+                                      "div",
+                                      {
+                                        staticClass: "date-fill",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.showDatePopup(date - 5, i)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(date - 5))]
+                                    )
+                                  : date >= 30
+                                    ? _c("div", { staticClass: "date-empty" }, [
+                                        _vm._v(_vm._s(" "))
+                                      ])
+                                    : _c("div", { staticClass: "date-empty" }, [
+                                        _vm._v(_vm._s(" "))
+                                      ])
+                              ]
+                            )
+                          : _vm._e()
+                      }),
+                      _vm._l(31 + 4, function(date) {
+                        return i == 9
+                          ? _c(
+                              "div",
+                              { staticClass: "has-text-centered date" },
+                              [
+                                date > 0 && date <= 31
+                                  ? _c(
+                                      "div",
+                                      {
+                                        staticClass: "date-fill",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.showDatePopup(date, i)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(date))]
+                                    )
+                                  : date >= 31
+                                    ? _c("div", { staticClass: "date-empty" }, [
+                                        _vm._v(_vm._s(" "))
+                                      ])
+                                    : _c("div", { staticClass: "date-empty" }, [
+                                        _vm._v(_vm._s(" "))
+                                      ])
+                              ]
+                            )
+                          : _vm._e()
+                      }),
+                      _vm._l(30 + 5, function(date) {
+                        return i == 10
+                          ? _c(
+                              "div",
+                              { staticClass: "has-text-centered date" },
+                              [
+                                date - 3 > 0 && date <= 30 + 3
+                                  ? _c(
+                                      "div",
+                                      {
+                                        staticClass: "date-fill",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.showDatePopup(date - 3, i)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(date - 3))]
+                                    )
+                                  : date >= 30
+                                    ? _c("div", { staticClass: "date-empty" }, [
+                                        _vm._v(_vm._s(" "))
+                                      ])
+                                    : _c("div", { staticClass: "date-empty" }, [
+                                        _vm._v(_vm._s(" "))
+                                      ])
+                              ]
+                            )
+                          : _vm._e()
+                      }),
+                      _vm._l(31 + 11, function(date) {
+                        return i == 11
+                          ? _c(
+                              "div",
+                              { staticClass: "has-text-centered date" },
+                              [
+                                date - 5 > 0 && date <= 31 + 5
+                                  ? _c(
+                                      "div",
+                                      {
+                                        staticClass: "date-fill",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.showDatePopup(date - 5, i)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(date - 5))]
+                                    )
+                                  : date >= 31
+                                    ? _c("div", { staticClass: "date-empty" }, [
+                                        _vm._v(_vm._s(" "))
+                                      ])
+                                    : _c("div", { staticClass: "date-empty" }, [
+                                        _vm._v(_vm._s(" "))
+                                      ])
+                              ]
+                            )
+                          : _vm._e()
+                      })
+                    ],
+                    2
+                  )
+                ])
+              ])
+            ]
+          )
+        })
+      ),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            active: _vm.isDatePopupShowing,
+            "has-modal-card": "has-modal-card",
+            canCancel: _vm.canCancel
+          },
+          on: {
+            "update:active": function($event) {
+              _vm.isDatePopupShowing = $event
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "modal-card" }, [
+            _c(
+              "div",
+              { staticClass: "modal-card-head bg-primary is-radiusless" },
+              [
                 _c(
                   "div",
                   {
-                    staticClass:
-                      "card-header-title has-item-centered text-white"
+                    staticClass: "modal-card-title has-text-centered text-white"
                   },
-                  [_vm._v(_vm._s(month))]
-                )
-              ]),
-              _c("div", { staticClass: "card-content" }, [
-                _c(
-                  "div",
-                  { staticClass: "columns is-gapless is-multiline is-mobile" },
                   [
-                    _vm._l(_vm.days, function(day) {
-                      return _c(
-                        "div",
-                        { staticClass: "has-text-centered date-title" },
-                        [_vm._v(_vm._s(day))]
-                      )
-                    }),
-                    _vm._l(31, function(date) {
-                      return i == 0
-                        ? _c("div", { staticClass: "has-text-centered date" }, [
-                            date > 0
-                              ? _c("div", { staticClass: "date-fill" }, [
-                                  _vm._v(_vm._s(date))
+                    _vm._v(
+                      _vm._s(_vm.daySelected) +
+                        " " +
+                        _vm._s(_vm.months[_vm.monthSelected]) +
+                        " 2017"
+                    )
+                  ]
+                )
+              ]
+            ),
+            _c(
+              "div",
+              { staticClass: "modal-card-body" },
+              [
+                _c(
+                  "b-table",
+                  {
+                    attrs: {
+                      data: _vm.isEmpty ? [] : _vm.popupData,
+                      bordered: _vm.isBordered,
+                      striped: _vm.isStriped,
+                      narrowed: _vm.isNarrowed,
+                      loading: _vm.isLoading,
+                      "mobile-cards": _vm.hasMobileCards
+                    },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(props) {
+                          return [
+                            _c(
+                              "b-table-column",
+                              { attrs: { label: "No", width: "40" } },
+                              [_vm._v(_vm._s(props.row.id))]
+                            ),
+                            _c("b-table-column", { attrs: { label: "Nama" } }, [
+                              _vm._v(_vm._s(props.row.name))
+                            ]),
+                            _c(
+                              "b-table-column",
+                              { attrs: { label: "Tahun Kelahiran" } },
+                              [_vm._v(_vm._s(props.row.yearBirth))]
+                            ),
+                            _c("b-table-column", { attrs: { label: "Opsi" } }, [
+                              _c("div", { staticClass: "field is-grouped" }, [
+                                _c("div", { staticClass: "control" }, [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "button is-warning is-small"
+                                    },
+                                    [_vm._v("Ubah")]
+                                  )
+                                ]),
+                                _c("div", { staticClass: "control" }, [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "button is-danger is-small"
+                                    },
+                                    [_vm._v("Hapus")]
+                                  )
                                 ])
-                              : _c("div", { staticClass: "date-empty" }, [
-                                  _vm._v(_vm._s(" "))
-                                ])
-                          ])
-                        : _vm._e()
-                    }),
-                    _vm._l(28 + 3, function(date) {
-                      return i == 1
-                        ? _c("div", { staticClass: "has-text-centered date" }, [
-                            date - 3 > 0
-                              ? _c("div", { staticClass: "date-fill" }, [
-                                  _vm._v(_vm._s(date - 3))
-                                ])
-                              : _c("div", { staticClass: "date-empty" }, [
-                                  _vm._v(_vm._s(" "))
-                                ])
-                          ])
-                        : _vm._e()
-                    }),
-                    _vm._l(31 + 3, function(date) {
-                      return i == 2
-                        ? _c("div", { staticClass: "has-text-centered date" }, [
-                            date - 3 > 0
-                              ? _c("div", { staticClass: "date-fill" }, [
-                                  _vm._v(_vm._s(date - 3))
-                                ])
-                              : _c("div", { staticClass: "date-empty" }, [
-                                  _vm._v(_vm._s(" "))
-                                ])
-                          ])
-                        : _vm._e()
-                    }),
-                    _vm._l(30 + 6, function(date) {
-                      return i == 3
-                        ? _c("div", { staticClass: "has-text-centered date" }, [
-                            date - 6 > 0
-                              ? _c("div", { staticClass: "date-fill" }, [
-                                  _vm._v(_vm._s(date - 6))
-                                ])
-                              : _c("div", { staticClass: "date-empty" }, [
-                                  _vm._v(_vm._s(" "))
-                                ])
-                          ])
-                        : _vm._e()
-                    }),
-                    _vm._l(31 + 1, function(date) {
-                      return i == 4
-                        ? _c("div", { staticClass: "has-text-centered date" }, [
-                            date - 1 > 0
-                              ? _c("div", { staticClass: "date-fill" }, [
-                                  _vm._v(_vm._s(date - 1))
-                                ])
-                              : _c("div", { staticClass: "date-empty" }, [
-                                  _vm._v(_vm._s(" "))
-                                ])
-                          ])
-                        : _vm._e()
-                    }),
-                    _vm._l(30 + 4, function(date) {
-                      return i == 5
-                        ? _c("div", { staticClass: "has-text-centered date" }, [
-                            date - 4 > 0
-                              ? _c("div", { staticClass: "date-fill" }, [
-                                  _vm._v(_vm._s(date - 4))
-                                ])
-                              : _c("div", { staticClass: "date-empty" }, [
-                                  _vm._v(_vm._s(" "))
-                                ])
-                          ])
-                        : _vm._e()
-                    }),
-                    _vm._l(31 + 6, function(date) {
-                      return i == 6
-                        ? _c("div", { staticClass: "has-text-centered date" }, [
-                            date - 6 > 0
-                              ? _c("div", { staticClass: "date-fill" }, [
-                                  _vm._v(_vm._s(date - 6))
-                                ])
-                              : _c("div", { staticClass: "date-empty" }, [
-                                  _vm._v(_vm._s(" "))
-                                ])
-                          ])
-                        : _vm._e()
-                    }),
-                    _vm._l(31 + 2, function(date) {
-                      return i == 7
-                        ? _c("div", { staticClass: "has-text-centered date" }, [
-                            date - 2 > 0
-                              ? _c("div", { staticClass: "date-fill" }, [
-                                  _vm._v(_vm._s(date - 2))
-                                ])
-                              : _c("div", { staticClass: "date-empty" }, [
-                                  _vm._v(_vm._s(" "))
-                                ])
-                          ])
-                        : _vm._e()
-                    }),
-                    _vm._l(30 + 5, function(date) {
-                      return i == 8
-                        ? _c("div", { staticClass: "has-text-centered date" }, [
-                            date - 5 > 0
-                              ? _c("div", { staticClass: "date-fill" }, [
-                                  _vm._v(_vm._s(date - 5))
-                                ])
-                              : _c("div", { staticClass: "date-empty" }, [
-                                  _vm._v(_vm._s(" "))
-                                ])
-                          ])
-                        : _vm._e()
-                    }),
-                    _vm._l(31, function(date) {
-                      return i == 9
-                        ? _c("div", { staticClass: "has-text-centered date" }, [
-                            date > 0
-                              ? _c("div", { staticClass: "date-fill" }, [
-                                  _vm._v(_vm._s(date))
-                                ])
-                              : _c("div", { staticClass: "date-empty" }, [
-                                  _vm._v(_vm._s(" "))
-                                ])
-                          ])
-                        : _vm._e()
-                    }),
-                    _vm._l(30 + 3, function(date) {
-                      return i == 10
-                        ? _c("div", { staticClass: "has-text-centered date" }, [
-                            date - 3 > 0
-                              ? _c("div", { staticClass: "date-fill" }, [
-                                  _vm._v(_vm._s(date - 3))
-                                ])
-                              : _c("div", { staticClass: "date-empty" }, [
-                                  _vm._v(_vm._s(" "))
-                                ])
-                          ])
-                        : _vm._e()
-                    }),
-                    _vm._l(31 + 5, function(date) {
-                      return i == 11
-                        ? _c("div", { staticClass: "has-text-centered date" }, [
-                            date - 5 > 0
-                              ? _c("div", { staticClass: "date-fill" }, [
-                                  _vm._v(_vm._s(date - 5))
-                                ])
-                              : _c("div", { staticClass: "date-empty" }, [
-                                  _vm._v(_vm._s(" "))
-                                ])
-                          ])
-                        : _vm._e()
-                    })
+                              ])
+                            ])
+                          ]
+                        }
+                      }
+                    ])
+                  },
+                  [
+                    _c(
+                      "template",
+                      { attrs: { slot: "empty" }, slot: "empty" },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "content has-text-grey has-text-centered"
+                          },
+                          [_vm._v("Tidak Ada Data Pada Tanggal Ini")]
+                        )
+                      ]
+                    )
                   ],
                   2
                 )
-              ])
-            ])
-          ]
-        )
-      })
-    )
-  ])
+              ],
+              1
+            )
+          ])
+        ]
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

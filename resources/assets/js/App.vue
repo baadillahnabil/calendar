@@ -10,42 +10,75 @@
                     .card-content
                         .columns.is-gapless.is-multiline.is-mobile
                             .has-text-centered.date-title(v-for="day in days") {{ day }}
-                            .has-text-centered.date(v-for="date in 31" v-if="i == 0")
-                                .date-fill(v-if="date > 0") {{ date }}
+                            .has-text-centered.date(v-for="date in 31+4" v-if="i == 0") <!-- January -->
+                                .date-fill(v-if="date > 0 && date <= 31", @click="showDatePopup(date, i)") {{ date }}
+                                .date-empty(v-else-if="date >= 31") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
-                            .has-text-centered.date(v-for="date in 28+3" v-if="i == 1")
-                                .date-fill(v-if="date-3 > 0") {{ date-3 }}
+                            .has-text-centered.date(v-for="date in 28+7" v-if="i == 1") <!-- February -->
+                                .date-fill(v-if="date-3 > 0 && date <= 28+3", @click="showDatePopup(date-3, i)") {{ date-3 }}
+                                .date-empty(v-else-if="date >= 28") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
-                            .has-text-centered.date(v-for="date in 31+3" v-if="i == 2")
-                                .date-fill(v-if="date-3 > 0") {{ date-3 }}
+                            .has-text-centered.date(v-for="date in 31+4" v-if="i == 2") <!-- March -->
+                                .date-fill(v-if="date-3 > 0 && date <= 31+3", @click="showDatePopup(date-3, i)") {{ date-3 }}
+                                .date-empty(v-else-if="date >= 31") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
-                            .has-text-centered.date(v-for="date in 30+6" v-if="i == 3")
-                                .date-fill(v-if="date-6 > 0") {{ date-6 }}
+                            .has-text-centered.date(v-for="date in 30+12" v-if="i == 3") <!-- April -->
+                                .date-fill(v-if="date-6 > 0 && date <= 30+6", @click="showDatePopup(date-6, i)") {{ date-6 }}
+                                .date-empty(v-else-if="date >= 30") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
-                            .has-text-centered.date(v-for="date in 31+1" v-if="i == 4")
-                                .date-fill(v-if="date-1 > 0") {{ date-1 }}
+                            .has-text-centered.date(v-for="date in 31+4" v-if="i == 4") <!-- Mei -->
+                                .date-fill(v-if="date-1 > 0 && date <= 31+1", @click="showDatePopup(date-1, i)") {{ date-1 }}
+                                .date-empty(v-else-if="date >= 31") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
-                            .has-text-centered.date(v-for="date in 30+4" v-if="i == 5")
-                                .date-fill(v-if="date-4 > 0") {{ date-4 }}
+                            .has-text-centered.date(v-for="date in 30+5" v-if="i == 5") <!-- June -->
+                                .date-fill(v-if="date-4 > 0 && date <= 30+4", @click="showDatePopup(date-4, i)") {{ date-4 }}
+                                .date-empty(v-else-if="date >= 30") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
-                            .has-text-centered.date(v-for="date in 31+6" v-if="i == 6")
-                                .date-fill(v-if="date-6 > 0") {{ date-6 }}
+                            .has-text-centered.date(v-for="date in 31+11" v-if="i == 6") <!-- July -->
+                                .date-fill(v-if="date-6 > 0 && date <= 31+6", @click="showDatePopup(date-6, i)") {{ date-6 }}
+                                .date-empty(v-else-if="date >= 31") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
-                            .has-text-centered.date(v-for="date in 31+2" v-if="i == 7")
-                                .date-fill(v-if="date-2 > 0") {{ date-2 }}
+                            .has-text-centered.date(v-for="date in 31+4" v-if="i == 7") <!-- August -->
+                                .date-fill(v-if="date-2 > 0 && date <= 31+2", @click="showDatePopup(date-2, i)") {{ date-2 }}
+                                .date-empty(v-else-if="date >= 31") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
-                            .has-text-centered.date(v-for="date in 30+5" v-if="i == 8")
-                                .date-fill(v-if="date-5 > 0") {{ date-5 }}
+                            .has-text-centered.date(v-for="date in 30+5" v-if="i == 8") <!-- September -->
+                                .date-fill(v-if="date-5 > 0 && date <= 30+5", @click="showDatePopup(date-5, i)") {{ date-5 }}
+                                .date-empty(v-else-if="date >= 30") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
-                            .has-text-centered.date(v-for="date in 31" v-if="i == 9")
-                                .date-fill(v-if="date > 0") {{ date }}
+                            .has-text-centered.date(v-for="date in 31+4" v-if="i == 9") <!-- October -->
+                                .date-fill(v-if="date > 0 && date <= 31", @click="showDatePopup(date, i)") {{ date }}
+                                .date-empty(v-else-if="date >= 31") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
-                            .has-text-centered.date(v-for="date in 30+3" v-if="i == 10")
-                                .date-fill(v-if="date-3 > 0") {{ date-3 }}
+                            .has-text-centered.date(v-for="date in 30+5" v-if="i == 10") <!-- November -->
+                                .date-fill(v-if="date-3 > 0 && date <= 30+3", @click="showDatePopup(date-3, i)") {{ date-3 }}
+                                .date-empty(v-else-if="date >= 30") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
-                            .has-text-centered.date(v-for="date in 31+5" v-if="i == 11")
-                                .date-fill(v-if="date-5 > 0") {{ date-5 }}
+                            .has-text-centered.date(v-for="date in 31+11" v-if="i == 11") <!-- December -->
+                                .date-fill(v-if="date-5 > 0 && date <= 31+5", @click="showDatePopup(date-5, i)") {{ date-5 }}
+                                .date-empty(v-else-if="date >= 31") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
+        
+        // Popup Date
+        b-modal(:active.sync="isDatePopupShowing", has-modal-card=true, :canCancel="canCancel")
+            .modal-card
+                .modal-card-head.bg-primary.is-radiusless
+                    .modal-card-title.has-text-centered.text-white {{ daySelected }} {{ months[monthSelected] }} 2017
+                .modal-card-body
+                    b-table(:data='isEmpty ? [] : popupData', :bordered='isBordered', :striped='isStriped', :narrowed='isNarrowed', :loading='isLoading', :mobile-cards='hasMobileCards')
+                        template(scope='props')
+                            b-table-column(label='No', width='40') {{ props.row.id }}
+                            b-table-column(label='Nama') {{ props.row.name }}
+                            b-table-column(label='Tahun Kelahiran') {{ props.row.yearBirth }}
+                            b-table-column(label='Opsi')
+                                .field.is-grouped
+                                    .control
+                                        a.button.is-warning.is-small Ubah
+                                    .control
+                                        a.button.is-danger.is-small Hapus
+                        template(slot='empty')
+                            .content.has-text-grey.has-text-centered Tidak Ada Data Pada Tanggal Ini
+
 
 </template>
 
@@ -53,30 +86,33 @@
     export default {
         name: 'app',
         data() {
+            const popupData = [{ id: '1', name: 'Nabil', yearBirth: '1995' }];
+
             return {
-                months: [
-                    'January',
-                    'February',
-                    'March',
-                    'April',
-                    'Mei',
-                    'June',
-                    'July',
-                    'August',
-                    'September',
-                    'October',
-                    'November',
-                    'December'
-                ],
-                days: [
-                    'Sun',
-                    'Mon',
-                    'Tue',
-                    'Wed',
-                    'Thu',
-                    'Fri',
-                    'Sat'
-                ],
+                months: ['January', 'February', 'March', 'April', 'Mei', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+
+                // modal data
+                isDatePopupShowing: false,
+                canCancel: ['escape', 'x', 'outside'],
+                daySelected: '',
+                monthSelected: '',
+
+                // Table Data
+                popupData,
+                isEmpty: false,
+                isBordered: false,
+                isStriped: false,
+                isNarrowed: false,
+                isLoading: false,
+                hasMobileCards: true
+            }
+        },
+        methods: {
+            showDatePopup(day, month) {
+                this.daySelected = day;
+                this.monthSelected = month;
+                this.isDatePopupShowing = true;
             }
         }
     }
@@ -92,19 +128,25 @@
     
     .column, h2
         font-weight bold
-        
+    
     .card
-        min-height 404px
-        
+        min-height 418px
+        .card-content
+            padding 0
+            margin 1.5rem
+            border 1px solid
+    
     .date-5-row
         padding-bottom 4.2rem
     
     .date-title
         padding 10px 0
         width 14.28%
+        border 1px solid
     
     .date
         width 14.28%
+        border 1px solid
     
     .date-fill
         padding 10px 0
@@ -117,7 +159,17 @@
         padding 10px 0
         cursor no-drop
         background-color lightGrey
+    
+    .modal
+        padding 10px
         
+        .modal-card-head
+            padding 10px 0
+        
+        .modal-card-body
+            .column
+                border-bottom 1px solid lightGrey
+                border-top 1px solid lightGrey
 
 </style>
 
