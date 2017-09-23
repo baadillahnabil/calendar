@@ -65,7 +65,7 @@
                 .modal-card-head.bg-primary.is-radiusless
                     .modal-card-title.has-text-centered.text-white {{ daySelected }} {{ months[monthSelected] }} 2017
                 .modal-card-body
-                    b-table(:data='isEmpty ? [] : popupData', :bordered='isBordered', :striped='isStriped', :narrowed='isNarrowed', :loading='isLoading', :mobile-cards='hasMobileCards')
+                    b-table(:data='isEmpty ? [] : allData', :bordered='isBordered', :striped='isStriped', :narrowed='isNarrowed', :loading='isLoading', :mobile-cards='hasMobileCards')
                         template(scope='props')
                             b-table-column(label='No', width='40') {{ props.row.id }}
                             b-table-column(label='Nama') {{ props.row.name }}
@@ -86,7 +86,8 @@
     export default {
         name: 'app',
         data() {
-            const popupData = [{ id: '1', name: 'Nabil', yearBirth: '1995' }];
+            const allData = [];
+            const popupData = [];
 
             return {
                 months: ['January', 'February', 'March', 'April', 'Mei', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -99,7 +100,7 @@
                 monthSelected: '',
 
                 // Table Data
-                popupData,
+                allData,
                 isEmpty: false,
                 isBordered: false,
                 isStriped: false,
@@ -113,7 +114,30 @@
                 this.daySelected = day;
                 this.monthSelected = month;
                 this.isDatePopupShowing = true;
+            },
+            getAllData() {
+                axios.get('people/view').then(({ data }) => {
+
+                        let rowIndex = 1;
+                        for (let i = 0; i < data.length; i++) {
+                            for (let j = 0; j < data[i][1].length; j++) {
+                                console.log(data[i][1][j]);
+                                let dataExplode = data[i][1][j].split('|');
+                                let people = {
+                                    id: rowIndex++,
+                                    name: dataExplode[0],
+                                    yearBirth: dataExplode[1],
+                                };
+                                this.allData.push(people);
+                            }
+                        }
+                        
+                    }
+                ).catch((err) => console.error(err));
             }
+        },
+        created() {
+            this.getAllData();
         }
     }
 </script>
@@ -147,18 +171,18 @@
     .date
         width 14.28%
         border 1px solid
-    
-    .date-fill
-        padding 10px 0
-        cursor pointer
-        &:hover
-            background-color info
-            color white
-    
-    .date-empty
-        padding 10px 0
-        cursor no-drop
-        background-color lightGrey
+        
+        .date-fill
+            padding 10px 0
+            cursor pointer
+            &:hover
+                background-color info
+                color white
+        
+        .date-empty
+            padding 10px 0
+            cursor no-drop
+            background-color lightGrey
     
     .modal
         padding 10px

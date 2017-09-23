@@ -1708,7 +1708,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'app',
     data: function data() {
-        var popupData = [{ id: '1', name: 'Nabil', yearBirth: '1995' }];
+        var allData = [];
+        var popupData = [];
 
         return {
             months: ['January', 'February', 'March', 'April', 'Mei', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -1721,7 +1722,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             monthSelected: '',
 
             // Table Data
-            popupData: popupData,
+            allData: allData,
             isEmpty: false,
             isBordered: false,
             isStriped: false,
@@ -1736,7 +1737,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.daySelected = day;
             this.monthSelected = month;
             this.isDatePopupShowing = true;
+        },
+        getAllData: function getAllData() {
+            var _this = this;
+
+            axios.get('people/view').then(function (_ref) {
+                var data = _ref.data;
+
+
+                var rowIndex = 1;
+                for (var i = 0; i < data.length; i++) {
+                    for (var j = 0; j < data[i][1].length; j++) {
+                        console.log(data[i][1][j]);
+                        var dataExplode = data[i][1][j].split('|');
+                        var people = {
+                            id: rowIndex++,
+                            name: dataExplode[0],
+                            yearBirth: dataExplode[1]
+                        };
+                        _this.allData.push(people);
+                    }
+                }
+            }).catch(function (err) {
+                return console.error(err);
+            });
         }
+    },
+    created: function created() {
+        this.getAllData();
     }
 });
 
@@ -1820,7 +1848,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.has-item-centered[data-v-bc42c88c] {\n  justify-content: center;\n}\n.bg-primary[data-v-bc42c88c] {\n  background-color: #00d1b2;\n}\n.bg-danger[data-v-bc42c88c] {\n  background-color: #ff3860;\n}\n.bg-warning[data-v-bc42c88c] {\n  background-color: #ffdd57;\n}\n.text-white[data-v-bc42c88c] {\n  color: #fff;\n}\n.component-root[data-v-bc42c88c] {\n  margin: 50px auto;\n}\n.column[data-v-bc42c88c],\nh2[data-v-bc42c88c] {\n  font-weight: bold;\n}\n.card[data-v-bc42c88c] {\n  min-height: 418px;\n}\n.card .card-content[data-v-bc42c88c] {\n  padding: 0;\n  margin: 1.5rem;\n  border: 1px solid;\n}\n.date-5-row[data-v-bc42c88c] {\n  padding-bottom: 4.2rem;\n}\n.date-title[data-v-bc42c88c] {\n  padding: 10px 0;\n  width: 14.28%;\n  border: 1px solid;\n}\n.date[data-v-bc42c88c] {\n  width: 14.28%;\n  border: 1px solid;\n}\n.date-fill[data-v-bc42c88c] {\n  padding: 10px 0;\n  cursor: pointer;\n}\n.date-fill[data-v-bc42c88c]:hover {\n  background-color: #3273dc;\n  color: #fff;\n}\n.date-empty[data-v-bc42c88c] {\n  padding: 10px 0;\n  cursor: no-drop;\n  background-color: #dbdbdb;\n}\n.modal[data-v-bc42c88c] {\n  padding: 10px;\n}\n.modal .modal-card-head[data-v-bc42c88c] {\n  padding: 10px 0;\n}\n.modal .modal-card-body .column[data-v-bc42c88c] {\n  border-bottom: 1px solid #dbdbdb;\n  border-top: 1px solid #dbdbdb;\n}\n", ""]);
+exports.push([module.i, "\n.has-item-centered[data-v-bc42c88c] {\n  justify-content: center;\n}\n.bg-primary[data-v-bc42c88c] {\n  background-color: #00d1b2;\n}\n.bg-danger[data-v-bc42c88c] {\n  background-color: #ff3860;\n}\n.bg-warning[data-v-bc42c88c] {\n  background-color: #ffdd57;\n}\n.text-white[data-v-bc42c88c] {\n  color: #fff;\n}\n.component-root[data-v-bc42c88c] {\n  margin: 50px auto;\n}\n.column[data-v-bc42c88c],\nh2[data-v-bc42c88c] {\n  font-weight: bold;\n}\n.card[data-v-bc42c88c] {\n  min-height: 418px;\n}\n.card .card-content[data-v-bc42c88c] {\n  padding: 0;\n  margin: 1.5rem;\n  border: 1px solid;\n}\n.date-5-row[data-v-bc42c88c] {\n  padding-bottom: 4.2rem;\n}\n.date-title[data-v-bc42c88c] {\n  padding: 10px 0;\n  width: 14.28%;\n  border: 1px solid;\n}\n.date[data-v-bc42c88c] {\n  width: 14.28%;\n  border: 1px solid;\n}\n.date .date-fill[data-v-bc42c88c] {\n  padding: 10px 0;\n  cursor: pointer;\n}\n.date .date-fill[data-v-bc42c88c]:hover {\n  background-color: #3273dc;\n  color: #fff;\n}\n.date .date-empty[data-v-bc42c88c] {\n  padding: 10px 0;\n  cursor: no-drop;\n  background-color: #dbdbdb;\n}\n.modal[data-v-bc42c88c] {\n  padding: 10px;\n}\n.modal .modal-card-head[data-v-bc42c88c] {\n  padding: 10px 0;\n}\n.modal .modal-card-body .column[data-v-bc42c88c] {\n  border-bottom: 1px solid #dbdbdb;\n  border-top: 1px solid #dbdbdb;\n}\n", ""]);
 
 // exports
 
@@ -20235,7 +20263,7 @@ var render = function() {
                   "b-table",
                   {
                     attrs: {
-                      data: _vm.isEmpty ? [] : _vm.popupData,
+                      data: _vm.isEmpty ? [] : _vm.allData,
                       bordered: _vm.isBordered,
                       striped: _vm.isStriped,
                       narrowed: _vm.isNarrowed,
