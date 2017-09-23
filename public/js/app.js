@@ -1677,8 +1677,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             months: ['January', 'February', 'March', 'April', 'Mei', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-            days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-            dayCount: 0
+            days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
         };
     }
 });
@@ -1763,7 +1762,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.component-root[data-v-bc42c88c] {\n  margin: 50px auto;\n}\n.column[data-v-bc42c88c],\nh2[data-v-bc42c88c] {\n  font-weight: bold;\n}\n.card[data-v-bc42c88c] {\n  min-height: 404px;\n}\n.has-item-centered[data-v-bc42c88c] {\n  justify-content: center;\n}\n.bg-primary[data-v-bc42c88c] {\n  background-color: #00d1b2;\n}\n.bg-danger[data-v-bc42c88c] {\n  background-color: #ff3860;\n}\n.bg-danger[data-v-bc42c88c] {\n  background-color: #ffdd57;\n}\n.text-white[data-v-bc42c88c] {\n  color: #fff;\n}\n.date-5-row[data-v-bc42c88c] {\n  padding-bottom: 4.2rem;\n}\n.date-title[data-v-bc42c88c] {\n  padding: 10px 0;\n  width: 14.28%;\n}\n.date[data-v-bc42c88c] {\n  width: 14.28%;\n}\n.date-fill[data-v-bc42c88c] {\n  padding: 10px 0;\n  cursor: pointer;\n}\n.date-fill[data-v-bc42c88c]:hover {\n  background-color: #3273dc;\n  color: #fff;\n}\n.date-empty[data-v-bc42c88c] {\n  padding: 10px 0;\n  cursor: pointer;\n  background-color: #808080;\n}\n", ""]);
+exports.push([module.i, "\n.has-item-centered[data-v-bc42c88c] {\n  justify-content: center;\n}\n.bg-primary[data-v-bc42c88c] {\n  background-color: #00d1b2;\n}\n.bg-danger[data-v-bc42c88c] {\n  background-color: #ff3860;\n}\n.bg-danger[data-v-bc42c88c] {\n  background-color: #ffdd57;\n}\n.text-white[data-v-bc42c88c] {\n  color: #fff;\n}\n.component-root[data-v-bc42c88c] {\n  margin: 50px auto;\n}\n.column[data-v-bc42c88c],\nh2[data-v-bc42c88c] {\n  font-weight: bold;\n}\n.card[data-v-bc42c88c] {\n  min-height: 404px;\n}\n.date-5-row[data-v-bc42c88c] {\n  padding-bottom: 4.2rem;\n}\n.date-title[data-v-bc42c88c] {\n  padding: 10px 0;\n  width: 14.28%;\n}\n.date[data-v-bc42c88c] {\n  width: 14.28%;\n}\n.date-fill[data-v-bc42c88c] {\n  padding: 10px 0;\n  cursor: pointer;\n}\n.date-fill[data-v-bc42c88c]:hover {\n  background-color: #3273dc;\n  color: #fff;\n}\n.date-empty[data-v-bc42c88c] {\n  padding: 10px 0;\n  cursor: no-drop;\n  background-color: #dbdbdb;\n}\n", ""]);
 
 // exports
 

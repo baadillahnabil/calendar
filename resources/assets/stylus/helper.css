@@ -1,0 +1,15 @@
+.has-item-centered {
+  justify-content: center;
+}
+.bg-primary {
+  background-color: #00d1b2;
+}
+.bg-danger {
+  background-color: #ff3860;
+}
+.bg-danger {
+  background-color: #ffdd57;
+}
+.text-white {
+  color: #fff;
+}

@@ -4,7 +4,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .version()
     .webpackConfig({
         resolve: {
-            extensions: ['*', '.js', '.jsx', '.vue', '.ts', '.tsx'],
+            extensions: ['*', '.js', '.jsx', '.vue', '.ts', '.tsx', '.styl'],
         },
     })
     .browserSync({

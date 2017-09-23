@@ -77,7 +77,6 @@
                     'Fri',
                     'Sat'
                 ],
-                dayCount: 0
             }
         }
     }
@@ -85,11 +84,8 @@
 
 <!-- for styling with stylus -->
 <style lang = "stylus" scoped>
-    primaryColor = hsl(171, 100%, 41%)
-    dangerColor = hsl(348, 100%, 61%)
-    warningColor = hsl(48, 100%, 67%)
-    infoColor = hsl(217, 71%, 53%)
-    successColor = hsl(141, 71%, 48%)
+    @import "../stylus/color.styl"
+    @import "../stylus/helper.styl"
     
     .component-root
         margin 50px auto
@@ -100,21 +96,6 @@
     .card
         min-height 404px
         
-    .has-item-centered
-        justify-content center
-    
-    .bg-primary
-        background-color primaryColor
-    
-    .bg-danger
-        background-color dangerColor
-    
-    .bg-danger
-        background-color warningColor
-    
-    .text-white
-        color white
-    
     .date-5-row
         padding-bottom 4.2rem
     
@@ -129,13 +110,13 @@
         padding 10px 0
         cursor pointer
         &:hover
-            background-color infoColor
+            background-color info
             color white
     
     .date-empty
         padding 10px 0
-        cursor pointer
-        background-color gray
+        cursor no-drop
+        background-color lightGrey
         
 
 </style>
