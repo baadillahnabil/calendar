@@ -1704,16 +1704,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'app',
     data: function data() {
+        var months = ['January', 'February', 'March', 'April', 'Mei', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
         var allData = [];
-        var popupData = [];
+        var eachDayData = [];
 
         return {
-            months: ['January', 'February', 'March', 'April', 'Mei', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-            days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+            months: months,
+            days: days,
 
             // modal data
             isDatePopupShowing: false,
@@ -1723,6 +1728,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             // Table Data
             allData: allData,
+            eachDayData: eachDayData,
             isEmpty: false,
             isBordered: false,
             isStriped: false,
@@ -1733,11 +1739,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        showDatePopup: function showDatePopup(day, month) {
-            this.daySelected = day;
-            this.monthSelected = month;
-            this.isDatePopupShowing = true;
-        },
         getAllData: function getAllData() {
             var _this = this;
 
@@ -1748,12 +1749,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var rowIndex = 1;
                 for (var i = 0; i < data.length; i++) {
                     for (var j = 0; j < data[i][1].length; j++) {
-                        console.log(data[i][1][j]);
                         var dataExplode = data[i][1][j].split('|');
+                        var dateExplode = data[i][0].split('-');
                         var people = {
                             id: rowIndex++,
                             name: dataExplode[0],
-                            yearBirth: dataExplode[1]
+                            yearBirth: dataExplode[1],
+                            day: dateExplode[0],
+                            month: dateExplode[1]
                         };
                         _this.allData.push(people);
                     }
@@ -1761,6 +1764,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (err) {
                 return console.error(err);
             });
+        },
+        dateHasData: function dateHasData(day, month) {
+            for (var i = 0; i < this.allData.length; i++) {
+                if (this.allData[i].day === day.toString() && this.allData[i].month === month.toString()) {
+                    return true;
+                }
+            }
+        },
+        getData: function getData(day, month) {
+            this.daySelected = day;
+            this.monthSelected = month;
+
+            this.eachDayData = [];
+
+            var rowIndex = 1;
+            for (var i = 0; i < this.allData.length; i++) {
+                if (this.allData[i].day === day.toString() && this.allData[i].month === (month + 1).toString()) {
+                    var data = {
+                        id: rowIndex++,
+                        name: this.allData[i].name,
+                        yearBirth: this.allData[i].yearBirth,
+                        day: this.allData[i].day,
+                        month: this.allData[i].month
+                    };
+                    this.eachDayData.push(data);
+                }
+            }
+            console.log(this.eachDayData);
+
+            this.isDatePopupShowing = true;
         }
     },
     created: function created() {
@@ -1848,7 +1881,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.has-item-centered[data-v-bc42c88c] {\n  justify-content: center;\n}\n.bg-primary[data-v-bc42c88c] {\n  background-color: #00d1b2;\n}\n.bg-danger[data-v-bc42c88c] {\n  background-color: #ff3860;\n}\n.bg-warning[data-v-bc42c88c] {\n  background-color: #ffdd57;\n}\n.text-white[data-v-bc42c88c] {\n  color: #fff;\n}\n.component-root[data-v-bc42c88c] {\n  margin: 50px auto;\n}\n.column[data-v-bc42c88c],\nh2[data-v-bc42c88c] {\n  font-weight: bold;\n}\n.card[data-v-bc42c88c] {\n  min-height: 418px;\n}\n.card .card-content[data-v-bc42c88c] {\n  padding: 0;\n  margin: 1.5rem;\n  border: 1px solid;\n}\n.date-5-row[data-v-bc42c88c] {\n  padding-bottom: 4.2rem;\n}\n.date-title[data-v-bc42c88c] {\n  padding: 10px 0;\n  width: 14.28%;\n  border: 1px solid;\n}\n.date[data-v-bc42c88c] {\n  width: 14.28%;\n  border: 1px solid;\n}\n.date .date-fill[data-v-bc42c88c] {\n  padding: 10px 0;\n  cursor: pointer;\n}\n.date .date-fill[data-v-bc42c88c]:hover {\n  background-color: #3273dc;\n  color: #fff;\n}\n.date .date-empty[data-v-bc42c88c] {\n  padding: 10px 0;\n  cursor: no-drop;\n  background-color: #dbdbdb;\n}\n.modal[data-v-bc42c88c] {\n  padding: 10px;\n}\n.modal .modal-card-head[data-v-bc42c88c] {\n  padding: 10px 0;\n}\n.modal .modal-card-body .column[data-v-bc42c88c] {\n  border-bottom: 1px solid #dbdbdb;\n  border-top: 1px solid #dbdbdb;\n}\n", ""]);
+exports.push([module.i, "\n.has-item-centered[data-v-bc42c88c] {\n  justify-content: center;\n}\n.bg-primary[data-v-bc42c88c] {\n  background-color: #00d1b2;\n}\n.bg-danger[data-v-bc42c88c] {\n  background-color: #ff3860;\n}\n.bg-warning[data-v-bc42c88c] {\n  background-color: #ffdd57;\n}\n.text-white[data-v-bc42c88c] {\n  color: #fff;\n}\n.is-full-width[data-v-bc42c88c] {\n  width: 100%;\n}\n.component-root[data-v-bc42c88c] {\n  margin: 50px auto;\n}\n.column[data-v-bc42c88c],\nh2[data-v-bc42c88c] {\n  font-weight: bold;\n}\n.card[data-v-bc42c88c] {\n  min-height: 418px;\n}\n.card .card-content[data-v-bc42c88c] {\n  padding: 0;\n  margin: 1.5rem;\n  border: 1px solid;\n}\n.date-5-row[data-v-bc42c88c] {\n  padding-bottom: 4.2rem;\n}\n.date-title[data-v-bc42c88c] {\n  padding: 10px 0;\n  width: 14.28%;\n  border: 1px solid;\n}\n.date[data-v-bc42c88c] {\n  width: 14.28%;\n  border: 1px solid;\n}\n.date .date-fill[data-v-bc42c88c] {\n  padding: 10px 0;\n  cursor: pointer;\n}\n.date .date-fill[data-v-bc42c88c]:hover {\n  background-color: #3273dc;\n  color: #fff;\n}\n.date .date-has-data[data-v-bc42c88c] {\n  background-color: #ff3860;\n  color: #fff;\n}\n.date .date-empty[data-v-bc42c88c] {\n  padding: 10px 0;\n  cursor: no-drop;\n  background-color: #dbdbdb;\n}\n.modal[data-v-bc42c88c] {\n  padding: 10px;\n}\n.modal .modal-card-head[data-v-bc42c88c] {\n  padding: 10px 0;\n}\n.modal .modal-card-body .column[data-v-bc42c88c] {\n  border-bottom: 1px solid #dbdbdb;\n  border-top: 1px solid #dbdbdb;\n}\n", ""]);
 
 // exports
 
@@ -19861,9 +19894,15 @@ var render = function() {
                                       "div",
                                       {
                                         staticClass: "date-fill",
+                                        class: {
+                                          "date-has-data": _vm.dateHasData(
+                                            date,
+                                            i + 1
+                                          )
+                                        },
                                         on: {
                                           click: function($event) {
-                                            _vm.showDatePopup(date, i)
+                                            _vm.getData(date, i)
                                           }
                                         }
                                       },
@@ -19891,9 +19930,15 @@ var render = function() {
                                       "div",
                                       {
                                         staticClass: "date-fill",
+                                        class: {
+                                          "date-has-data": _vm.dateHasData(
+                                            date - 3,
+                                            i + 1
+                                          )
+                                        },
                                         on: {
                                           click: function($event) {
-                                            _vm.showDatePopup(date - 3, i)
+                                            _vm.getData(date - 3, i)
                                           }
                                         }
                                       },
@@ -19921,9 +19966,15 @@ var render = function() {
                                       "div",
                                       {
                                         staticClass: "date-fill",
+                                        class: {
+                                          "date-has-data": _vm.dateHasData(
+                                            date - 3,
+                                            i + 1
+                                          )
+                                        },
                                         on: {
                                           click: function($event) {
-                                            _vm.showDatePopup(date - 3, i)
+                                            _vm.getData(date - 3, i)
                                           }
                                         }
                                       },
@@ -19951,9 +20002,15 @@ var render = function() {
                                       "div",
                                       {
                                         staticClass: "date-fill",
+                                        class: {
+                                          "date-has-data": _vm.dateHasData(
+                                            date - 6,
+                                            i + 1
+                                          )
+                                        },
                                         on: {
                                           click: function($event) {
-                                            _vm.showDatePopup(date - 6, i)
+                                            _vm.getData(date - 6, i)
                                           }
                                         }
                                       },
@@ -19981,9 +20038,15 @@ var render = function() {
                                       "div",
                                       {
                                         staticClass: "date-fill",
+                                        class: {
+                                          "date-has-data": _vm.dateHasData(
+                                            date - 1,
+                                            i + 1
+                                          )
+                                        },
                                         on: {
                                           click: function($event) {
-                                            _vm.showDatePopup(date - 1, i)
+                                            _vm.getData(date - 1, i)
                                           }
                                         }
                                       },
@@ -20011,9 +20074,15 @@ var render = function() {
                                       "div",
                                       {
                                         staticClass: "date-fill",
+                                        class: {
+                                          "date-has-data": _vm.dateHasData(
+                                            date - 4,
+                                            i + 1
+                                          )
+                                        },
                                         on: {
                                           click: function($event) {
-                                            _vm.showDatePopup(date - 4, i)
+                                            _vm.getData(date - 4, i)
                                           }
                                         }
                                       },
@@ -20041,9 +20110,15 @@ var render = function() {
                                       "div",
                                       {
                                         staticClass: "date-fill",
+                                        class: {
+                                          "date-has-data": _vm.dateHasData(
+                                            date - 6,
+                                            i + 1
+                                          )
+                                        },
                                         on: {
                                           click: function($event) {
-                                            _vm.showDatePopup(date - 6, i)
+                                            _vm.getData(date - 6, i)
                                           }
                                         }
                                       },
@@ -20071,9 +20146,15 @@ var render = function() {
                                       "div",
                                       {
                                         staticClass: "date-fill",
+                                        class: {
+                                          "date-has-data": _vm.dateHasData(
+                                            date - 2,
+                                            i + 1
+                                          )
+                                        },
                                         on: {
                                           click: function($event) {
-                                            _vm.showDatePopup(date - 2, i)
+                                            _vm.getData(date - 2, i)
                                           }
                                         }
                                       },
@@ -20101,9 +20182,15 @@ var render = function() {
                                       "div",
                                       {
                                         staticClass: "date-fill",
+                                        class: {
+                                          "date-has-data": _vm.dateHasData(
+                                            date - 5,
+                                            i + 1
+                                          )
+                                        },
                                         on: {
                                           click: function($event) {
-                                            _vm.showDatePopup(date - 5, i)
+                                            _vm.getData(date - 5, i)
                                           }
                                         }
                                       },
@@ -20131,9 +20218,15 @@ var render = function() {
                                       "div",
                                       {
                                         staticClass: "date-fill",
+                                        class: {
+                                          "date-has-data": _vm.dateHasData(
+                                            date,
+                                            i + 1
+                                          )
+                                        },
                                         on: {
                                           click: function($event) {
-                                            _vm.showDatePopup(date, i)
+                                            _vm.getData(date, i)
                                           }
                                         }
                                       },
@@ -20161,9 +20254,15 @@ var render = function() {
                                       "div",
                                       {
                                         staticClass: "date-fill",
+                                        class: {
+                                          "date-has-data": _vm.dateHasData(
+                                            date - 3,
+                                            i + 1
+                                          )
+                                        },
                                         on: {
                                           click: function($event) {
-                                            _vm.showDatePopup(date - 3, i)
+                                            _vm.getData(date - 3, i)
                                           }
                                         }
                                       },
@@ -20191,9 +20290,15 @@ var render = function() {
                                       "div",
                                       {
                                         staticClass: "date-fill",
+                                        class: {
+                                          "date-has-data": _vm.dateHasData(
+                                            date - 5,
+                                            i + 1
+                                          )
+                                        },
                                         on: {
                                           click: function($event) {
-                                            _vm.showDatePopup(date - 5, i)
+                                            _vm.getData(date - 5, i)
                                           }
                                         }
                                       },
@@ -20263,7 +20368,7 @@ var render = function() {
                   "b-table",
                   {
                     attrs: {
-                      data: _vm.isEmpty ? [] : _vm.allData,
+                      data: _vm.isEmpty ? [] : _vm.eachDayData,
                       bordered: _vm.isBordered,
                       striped: _vm.isStriped,
                       narrowed: _vm.isNarrowed,
@@ -20335,6 +20440,15 @@ var render = function() {
                 )
               ],
               1
+            ),
+            _c(
+              "div",
+              { staticClass: "modal-card-foot is-radiusless is-paddingless" },
+              [
+                _c("a", { staticClass: "button is-success is-full-width" }, [
+                  _vm._v("Tambah Data")
+                ])
+              ]
             )
           ])
         ]

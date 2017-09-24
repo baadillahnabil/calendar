@@ -13,3 +13,6 @@
 .text-white {
   color: #fff;
 }
+.is-full-width {
+  width: 100%;
+}
