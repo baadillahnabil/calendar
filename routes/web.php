@@ -4,8 +4,8 @@ Route::view('/', 'index');
 
 Route::prefix('people')->group(function () {
     Route::get('view/', 'PeopleController@index');
-    Route::get('view/{day}/{month}', 'PeopleController@show');
-    Route::post('add/{day}/{month}/{people_id}', 'PeopleController@create');
+    Route::post('add/', 'PeopleController@add');
+//    Route::post('add/{day}/{month}/{people_id}', 'PeopleController@add');
     Route::patch('edit/{day}/{month}/{people_id}', 'PeopleController@edit');
     Route::delete('delete/{day}/{month}/{people_id}', 'PeopleController@destroy');
 });

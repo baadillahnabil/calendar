@@ -11,61 +11,61 @@
                         .columns.is-gapless.is-multiline.is-mobile
                             .has-text-centered.date-title(v-for="day in days") {{ day }}
                             .has-text-centered.date(v-for="date in 31+4" v-if="i == 0") <!-- January -->
-                                .date-fill(v-if="date > 0 && date <= 31", @click="getData(date, i)", :class="{'date-has-data': dateHasData(date, i+1)}") {{ date }}
+                                .date-fill(v-if="date > 0 && date <= 31", @click="getData(date, i)", :class="{'date-has-data': dateHasData(date, i)}") {{ date }}
                                 .date-empty(v-else-if="date >= 31") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
                             .has-text-centered.date(v-for="date in 28+7" v-if="i == 1") <!-- February -->
-                                .date-fill(v-if="date-3 > 0 && date <= 28+3", @click="getData(date-3, i)", :class="{'date-has-data': dateHasData(date-3, i+1)}") {{ date-3 }}
+                                .date-fill(v-if="date-3 > 0 && date <= 28+3", @click="getData(date-3, i)", :class="{'date-has-data': dateHasData(date-3, i)}") {{ date-3 }}
                                 .date-empty(v-else-if="date >= 28") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
                             .has-text-centered.date(v-for="date in 31+4" v-if="i == 2") <!-- March -->
-                                .date-fill(v-if="date-3 > 0 && date <= 31+3", @click="getData(date-3, i)", :class="{'date-has-data': dateHasData(date-3, i+1)}") {{ date-3 }}
+                                .date-fill(v-if="date-3 > 0 && date <= 31+3", @click="getData(date-3, i)", :class="{'date-has-data': dateHasData(date-3, i)}") {{ date-3 }}
                                 .date-empty(v-else-if="date >= 31") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
                             .has-text-centered.date(v-for="date in 30+12" v-if="i == 3") <!-- April -->
-                                .date-fill(v-if="date-6 > 0 && date <= 30+6", @click="getData(date-6, i)", :class="{'date-has-data': dateHasData(date-6, i+1)}") {{ date-6 }}
+                                .date-fill(v-if="date-6 > 0 && date <= 30+6", @click="getData(date-6, i)", :class="{'date-has-data': dateHasData(date-6, i)}") {{ date-6 }}
                                 .date-empty(v-else-if="date >= 30") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
                             .has-text-centered.date(v-for="date in 31+4" v-if="i == 4") <!-- Mei -->
-                                .date-fill(v-if="date-1 > 0 && date <= 31+1", @click="getData(date-1, i)", :class="{'date-has-data': dateHasData(date-1, i+1)}") {{ date-1 }}
+                                .date-fill(v-if="date-1 > 0 && date <= 31+1", @click="getData(date-1, i)", :class="{'date-has-data': dateHasData(date-1, i)}") {{ date-1 }}
                                 .date-empty(v-else-if="date >= 31") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
                             .has-text-centered.date(v-for="date in 30+5" v-if="i == 5") <!-- June -->
-                                .date-fill(v-if="date-4 > 0 && date <= 30+4", @click="getData(date-4, i)", :class="{'date-has-data': dateHasData(date-4, i+1)}") {{ date-4 }}
+                                .date-fill(v-if="date-4 > 0 && date <= 30+4", @click="getData(date-4, i)", :class="{'date-has-data': dateHasData(date-4, i)}") {{ date-4 }}
                                 .date-empty(v-else-if="date >= 30") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
                             .has-text-centered.date(v-for="date in 31+11" v-if="i == 6") <!-- July -->
-                                .date-fill(v-if="date-6 > 0 && date <= 31+6", @click="getData(date-6, i)", :class="{'date-has-data': dateHasData(date-6, i+1)}") {{ date-6 }}
+                                .date-fill(v-if="date-6 > 0 && date <= 31+6", @click="getData(date-6, i)", :class="{'date-has-data': dateHasData(date-6, i)}") {{ date-6 }}
                                 .date-empty(v-else-if="date >= 31") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
                             .has-text-centered.date(v-for="date in 31+4" v-if="i == 7") <!-- August -->
-                                .date-fill(v-if="date-2 > 0 && date <= 31+2", @click="getData(date-2, i)", :class="{'date-has-data': dateHasData(date-2, i+1)}") {{ date-2 }}
+                                .date-fill(v-if="date-2 > 0 && date <= 31+2", @click="getData(date-2, i)", :class="{'date-has-data': dateHasData(date-2, i)}") {{ date-2 }}
                                 .date-empty(v-else-if="date >= 31") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
                             .has-text-centered.date(v-for="date in 30+5" v-if="i == 8") <!-- September -->
-                                .date-fill(v-if="date-5 > 0 && date <= 30+5", @click="getData(date-5, i)", :class="{'date-has-data': dateHasData(date-5, i+1)}") {{ date-5 }}
+                                .date-fill(v-if="date-5 > 0 && date <= 30+5", @click="getData(date-5, i)", :class="{'date-has-data': dateHasData(date-5, i)}") {{ date-5 }}
                                 .date-empty(v-else-if="date >= 30") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
                             .has-text-centered.date(v-for="date in 31+4" v-if="i == 9") <!-- October -->
-                                .date-fill(v-if="date > 0 && date <= 31", @click="getData(date, i)", :class="{'date-has-data': dateHasData(date, i+1)}") {{ date }}
+                                .date-fill(v-if="date > 0 && date <= 31", @click="getData(date, i)", :class="{'date-has-data': dateHasData(date, i)}") {{ date }}
                                 .date-empty(v-else-if="date >= 31") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
                             .has-text-centered.date(v-for="date in 30+5" v-if="i == 10") <!-- November -->
-                                .date-fill(v-if="date-3 > 0 && date <= 30+3", @click="getData(date-3, i)", :class="{'date-has-data': dateHasData(date-3, i+1)}") {{ date-3 }}
+                                .date-fill(v-if="date-3 > 0 && date <= 30+3", @click="getData(date-3, i)", :class="{'date-has-data': dateHasData(date-3, i)}") {{ date-3 }}
                                 .date-empty(v-else-if="date >= 30") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
                             .has-text-centered.date(v-for="date in 31+11" v-if="i == 11") <!-- December -->
-                                .date-fill(v-if="date-5 > 0 && date <= 31+5", @click="getData(date-5, i)", :class="{'date-has-data': dateHasData(date-5, i+1)}") {{ date-5 }}
+                                .date-fill(v-if="date-5 > 0 && date <= 31+5", @click="getData(date-5, i)", :class="{'date-has-data': dateHasData(date-5, i)}") {{ date-5 }}
                                 .date-empty(v-else-if="date >= 31") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
         
-        // Popup Date
+        // Show Lists Data Modal
         b-modal(:active.sync="isDatePopupShowing", has-modal-card=true, :canCancel="canCancel")
             .modal-card
                 .modal-card-head.bg-primary.is-radiusless
                     .modal-card-title.has-text-centered.text-white {{ daySelected }} {{ months[monthSelected] }} 2017
                 .modal-card-body
-                    b-table(:data='isEmpty ? [] : eachDayData', :bordered='isBordered', :striped='isStriped', :narrowed='isNarrowed', :loading='isLoading', :mobile-cards='hasMobileCards')
+                    b-table(:data='isTableEmpty ? [] : eachDayData', :bordered='isTableBordered', :striped='isTableStriped', :narrowed='isTableNarrowed', :loading='isTableLoading', :mobile-cards='hasMobileCards')
                         template(scope='props')
                             b-table-column(label='No', width='40') {{ props.row.id }}
                             b-table-column(label='Nama') {{ props.row.name }}
@@ -79,13 +79,30 @@
                         template(slot='empty')
                             .content.has-text-grey.has-text-centered Tidak Ada Data Pada Tanggal Ini
                 .modal-card-foot.is-radiusless.is-paddingless
-                    a.button.is-success.is-full-width Tambah Data
-
+                    a.button.is-success.is-full-width(@click="isAddDataPopupShowing = true") Tambah Data
+        
+        // Add Data Modal
+        b-modal(:active.sync="isAddDataPopupShowing", has-modal-card=true, :canCancel="canCancel")
+            .modal-card
+                .modal-card-body
+                    b-field(grouped)
+                        b-field(label='Nama', expanded)
+                            b-input(v-model="newName", ref="inputNewName")
+                        b-field(label='Tahun Kelahiran', expanded)
+                            b-input(type="number", v-model="newYearBirth")
+                .modal-card-foot.is-radiusless.is-paddingless
+                    a.button.is-success.is-marginless.is-radiusless.is-full-width(@click="addData(daySelected, monthSelected)") Tambahkan
+                    a.button.is-danger.is-marginless.is-radiusless.is-full-width(@click="isAddDataPopupShowing = false") Batal
+        
+        b-loading(:active.sync="isLoading", :canCancel="canCancelLoading")
 
 </template>
 
 <script>
+    import BField from "buefy/src/components/field/Field";
+
     export default {
+        components: { BField },
         name: 'app',
         data() {
             const months = ['January', 'February', 'March', 'April', 'Mei', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -107,16 +124,28 @@
                 // Table Data
                 allData,
                 eachDayData,
-                isEmpty: false,
-                isBordered: false,
-                isStriped: false,
-                isNarrowed: false,
+                isTableEmpty: false,
+                isTableBordered: false,
+                isTableStriped: false,
+                isTableNarrowed: false,
+                isTableLoading: false,
+                hasMobileCards: true,
+
+                // Add Data
+                isAddDataPopupShowing: false,
+                newName: '',
+                newYearBirth: '',
+
+                // loading data
                 isLoading: false,
-                hasMobileCards: true
+                canCancelLoading: false
             }
         },
         methods: {
             getAllData() {
+                this.allData = [];
+                this.isLoading = true;
+
                 axios.get('people/view').then(({ data }) => {
 
                         let rowIndex = 1;
@@ -134,13 +163,17 @@
                                 this.allData.push(people);
                             }
                         }
+                        this.isLoading = false;
                     }
-                ).catch((err) => console.error(err));
+                ).catch((err) => {
+                    this.isLoading = false;
+                    console.error(err);
+                });
             },
 
             dateHasData(day, month) {
                 for (let i = 0; i < this.allData.length; i++) {
-                    if (this.allData[i].day === day.toString() && this.allData[i].month === month.toString()) {
+                    if (this.allData[i].day === day.toString() && this.allData[i].month === (month + 1).toString()) {
                         return true;
                     }
                 }
@@ -165,13 +198,56 @@
                         this.eachDayData.push(data);
                     }
                 }
-                console.log(this.eachDayData);
-
                 this.isDatePopupShowing = true;
+            },
+
+            addData(day, month) {
+                console.log(`Add New Data With Name ${this.newName} and Year Birth ${this.newYearBirth} in Day ${day} - Month ${month + 1}`);
+                this.isLoading = true;
+
+                axios.post('people/add', {
+                    day: day,
+                    month: month + 1,
+                    name: this.newName,
+                    yearBirth: this.newYearBirth
+                }).then(({ data }) => {
+                    console.log(data);
+                    this.getAllData();
+                    this.isAddDataPopupShowing = false;
+                    this.isDatePopupShowing = false;
+                    this.isLoading = false;
+                    
+                    this.snackbar('Data berhasil di tambahkan', 'is-success', 'is-bottom-right')
+                }).catch((err) => {
+                    this.isLoading = true;
+                    console.error(err);
+                });
+            },
+            
+            // snackbar
+            snackbar(message, type, position) {
+                this.$snackbar.open({
+                    message: message,
+                    type: type,
+                    position: position
+                })
             }
 
         },
-        created() {
+
+        watch: {
+            isAddDataPopupShowing(value) {
+                if (value) {
+                    // this.$refs.inputNewName.focus();
+                } else {
+                    this.isAddDataPopupShowing = false;
+                    this.newName = '';
+                    this.newYearBirth = '';
+                }
+            }
+        },
+
+        mounted() {
             this.getAllData();
         }
     }
