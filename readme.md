@@ -15,6 +15,18 @@ This also use SPA concept or all server requests is handled using powerful javas
 
 Many thanks for all the framework and library in above.
 
+
+#### Installation
+
+```
+> git clone https://github.com/baadillahnabil/calendar.git // clone this repo
+> cd calendar // move to folder directory
+> npm install // or yarn // install all npm dependencies
+> composer install // install all composer dependencies
+> php artisan serve // run to the browser
+```
+
+
 #### License
 
 The project is open-sourced and licensed under the [MIT license](http://opensource.org/licenses/MIT). 
