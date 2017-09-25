@@ -1952,18 +1952,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 month: month + 1,
                 name: this.newName,
                 yearBirth: this.newYearBirth
-            }).then(function (_ref2) {
-                var data = _ref2.data;
-
-                console.log(data);
+            }).then(function () {
                 _this2.getAllData();
                 _this2.isAddDataPopupShowing = false;
                 _this2.isDatePopupShowing = false;
-                _this2.isLoading = false;
 
-                _this2.snackbar('Data berhasil di tambahkan', 'is-success', 'is-bottom-right');
+                _this2.isLoading = false;
+                _this2.toast('Data berhasil di tambahkan');
             }).catch(function (err) {
-                _this2.isLoading = true;
+                _this2.isLoading = false;
+                console.error(err);
+            });
+        },
+        deleteData: function deleteData(rowId, day, month) {
+            var _this3 = this;
+
+            console.log('Row ID = ' + rowId + ' || Day = ' + day + ' || Month = ' + (month + 1));
+            this.isLoading = true;
+
+            axios.post('people/delete', {
+                rowId: rowId,
+                day: day,
+                month: month + 1
+            }).then(function () {
+                _this3.getAllData();
+                _this3.isAddDataPopupShowing = false;
+                _this3.isDatePopupShowing = false;
+
+                _this3.isLoading = false;
+                _this3.toast('Data berhasil di hapus');
+            }).catch(function (err) {
+                _this3.isLoading = false;
                 console.error(err);
             });
         },
@@ -1976,6 +1995,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 type: type,
                 position: position
             });
+        },
+
+
+        // toast
+        toast: function toast(message) {
+            this.$toast.open(message);
         }
     },
 
@@ -20700,7 +20725,16 @@ var render = function() {
                                   _c(
                                     "a",
                                     {
-                                      staticClass: "button is-danger is-small"
+                                      staticClass: "button is-danger is-small",
+                                      on: {
+                                        click: function($event) {
+                                          _vm.deleteData(
+                                            props.row.id,
+                                            _vm.daySelected,
+                                            _vm.monthSelected
+                                          )
+                                        }
+                                      }
                                     },
                                     [_vm._v("Hapus")]
                                   )

@@ -75,7 +75,7 @@
                                     .control
                                         a.button.is-warning.is-small Ubah
                                     .control
-                                        a.button.is-danger.is-small Hapus
+                                        a.button.is-danger.is-small(@click="deleteData(props.row.id, daySelected, monthSelected)") Hapus
                         template(slot='empty')
                             .content.has-text-grey.has-text-centered Tidak Ada Data Pada Tanggal Ini
                 .modal-card-foot.is-radiusless.is-paddingless
@@ -206,24 +206,44 @@
                 this.isLoading = true;
 
                 axios.post('people/add', {
-                    day: day,
+                    day,
                     month: month + 1,
                     name: this.newName,
                     yearBirth: this.newYearBirth
-                }).then(({ data }) => {
-                    console.log(data);
+                }).then(() => {
                     this.getAllData();
                     this.isAddDataPopupShowing = false;
                     this.isDatePopupShowing = false;
+
                     this.isLoading = false;
-                    
-                    this.snackbar('Data berhasil di tambahkan', 'is-success', 'is-bottom-right')
+                    this.toast('Data berhasil di tambahkan');
                 }).catch((err) => {
-                    this.isLoading = true;
+                    this.isLoading = false;
                     console.error(err);
                 });
             },
-            
+
+            deleteData(rowId, day, month) {
+                console.log(`Row ID = ${rowId} || Day = ${day} || Month = ${month + 1}`);
+                this.isLoading = true;
+
+                axios.post('people/delete', {
+                    rowId,
+                    day,
+                    month: month + 1
+                }).then(() => {
+                    this.getAllData();
+                    this.isAddDataPopupShowing = false;
+                    this.isDatePopupShowing = false;
+
+                    this.isLoading = false;
+                    this.toast('Data berhasil di hapus');
+                }).catch((err) => {
+                    this.isLoading = false;
+                    console.error(err);
+                });
+            },
+
             // snackbar
             snackbar(message, type, position) {
                 this.$snackbar.open({
@@ -231,7 +251,12 @@
                     type: type,
                     position: position
                 })
-            }
+            },
+
+            // toast
+            toast(message) {
+                this.$toast.open(message);
+            },
 
         },
 

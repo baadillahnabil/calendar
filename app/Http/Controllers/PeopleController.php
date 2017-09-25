@@ -44,8 +44,17 @@ class PeopleController extends Controller
         //
     }
 
-    public function destroy($day, $month, $people_id)
+    public function destroy(Request $request)
     {
-        //
+        $path = 'storage/' . $request->day . '-' . $request->month . '-2017.txt';
+        $row_id = $request->rowId - 1;
+
+        $data = file($path); //file in to an array
+        unset($data[$row_id]);
+
+        $new_data = implode('', $data);
+        file_put_contents(public_path($path), $new_data, LOCK_EX);
+
+        return 'Data Deleted Successfully';
     }
 }
