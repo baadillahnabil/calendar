@@ -1,6 +1,6 @@
 This is just a simple CRUD operations in calendar which shows lists of people that was born that day. 
 
-This project also using **Flat File Database** which use a single text file (.txt) as database. The database-text-file is located inside `public/storage` folder. The file name is taken accordingly to their respective date.
+This project also using **Flat File Database** which use a single text file (.txt) as database. The database-text-file is located inside `storage/app/public/` folder. The file name is taken accordingly to their respective date.
 
 This also use SPA concept or all server requests is handled using powerful javascript library called **axios**. 
 
