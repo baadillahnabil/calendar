@@ -13,60 +13,63 @@
                 input.input(placeholder='Cari disini, lalu tekan \'Enter\' atau tombol \'Cari\'', v-model.lazy="searchText", @keyup.enter="search")
             .control
                 a.button.is-success(@click="search") Cari
+        br
+        .field
+            b-switch(v-model="showGrid") {{ switchText }}
         hr
         .columns.is-multiline.is-gapless
             .column.is-one-third.has-text-centered(v-for="(month, i) in months")
                 .card
                     .card-header.bg-primary
                         .card-header-title.has-item-centered.text-white {{ month }}
-                    .card-content
+                    .card-content(:class="{'border-1': showGrid}")
                         .columns.is-gapless.is-multiline.is-mobile
-                            .has-text-centered.date-title(v-for="day in days") {{ day }}
-                            .has-text-centered.date(v-for="date in 31+4" v-if="i == 0") <!-- January -->
+                            .has-text-centered.date-title(v-for="day in days", :class="{'border-1': showGrid}") {{ day }}
+                            .has-text-centered.date(:class="{'border-1': showGrid}", v-for="date in 31+4" v-if="i == 0") <!-- January -->
                                 .date-fill(v-if="date > 0 && date <= 31", @click="getData(date, i)", :class="{'date-has-data': dateHasData(date, i)}") {{ date }}
                                 .date-empty(v-else-if="date >= 31") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
-                            .has-text-centered.date(v-for="date in 28+7" v-if="i == 1") <!-- February -->
+                            .has-text-centered.date(:class="{'border-1': showGrid}", v-for="date in 28+7" v-if="i == 1") <!-- February -->
                                 .date-fill(v-if="date-3 > 0 && date <= 28+3", @click="getData(date-3, i)", :class="{'date-has-data': dateHasData(date-3, i)}") {{ date-3 }}
                                 .date-empty(v-else-if="date >= 28") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
-                            .has-text-centered.date(v-for="date in 31+4" v-if="i == 2") <!-- March -->
+                            .has-text-centered.date(:class="{'border-1': showGrid}", v-for="date in 31+4" v-if="i == 2") <!-- March -->
                                 .date-fill(v-if="date-3 > 0 && date <= 31+3", @click="getData(date-3, i)", :class="{'date-has-data': dateHasData(date-3, i)}") {{ date-3 }}
                                 .date-empty(v-else-if="date >= 31") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
-                            .has-text-centered.date(v-for="date in 30+12" v-if="i == 3") <!-- April -->
+                            .has-text-centered.date(:class="{'border-1': showGrid}", v-for="date in 30+12" v-if="i == 3") <!-- April -->
                                 .date-fill(v-if="date-6 > 0 && date <= 30+6", @click="getData(date-6, i)", :class="{'date-has-data': dateHasData(date-6, i)}") {{ date-6 }}
                                 .date-empty(v-else-if="date >= 30") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
-                            .has-text-centered.date(v-for="date in 31+4" v-if="i == 4") <!-- Mei -->
+                            .has-text-centered.date(:class="{'border-1': showGrid}", v-for="date in 31+4" v-if="i == 4") <!-- Mei -->
                                 .date-fill(v-if="date-1 > 0 && date <= 31+1", @click="getData(date-1, i)", :class="{'date-has-data': dateHasData(date-1, i)}") {{ date-1 }}
                                 .date-empty(v-else-if="date >= 31") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
-                            .has-text-centered.date(v-for="date in 30+5" v-if="i == 5") <!-- June -->
+                            .has-text-centered.date(:class="{'border-1': showGrid}", v-for="date in 30+5" v-if="i == 5") <!-- June -->
                                 .date-fill(v-if="date-4 > 0 && date <= 30+4", @click="getData(date-4, i)", :class="{'date-has-data': dateHasData(date-4, i)}") {{ date-4 }}
                                 .date-empty(v-else-if="date >= 30") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
-                            .has-text-centered.date(v-for="date in 31+11" v-if="i == 6") <!-- July -->
+                            .has-text-centered.date(:class="{'border-1': showGrid}", v-for="date in 31+11" v-if="i == 6") <!-- July -->
                                 .date-fill(v-if="date-6 > 0 && date <= 31+6", @click="getData(date-6, i)", :class="{'date-has-data': dateHasData(date-6, i)}") {{ date-6 }}
                                 .date-empty(v-else-if="date >= 31") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
-                            .has-text-centered.date(v-for="date in 31+4" v-if="i == 7") <!-- August -->
+                            .has-text-centered.date(:class="{'border-1': showGrid}", v-for="date in 31+4" v-if="i == 7") <!-- August -->
                                 .date-fill(v-if="date-2 > 0 && date <= 31+2", @click="getData(date-2, i)", :class="{'date-has-data': dateHasData(date-2, i)}") {{ date-2 }}
                                 .date-empty(v-else-if="date >= 31") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
-                            .has-text-centered.date(v-for="date in 30+5" v-if="i == 8") <!-- September -->
+                            .has-text-centered.date(:class="{'border-1': showGrid}", v-for="date in 30+5" v-if="i == 8") <!-- September -->
                                 .date-fill(v-if="date-5 > 0 && date <= 30+5", @click="getData(date-5, i)", :class="{'date-has-data': dateHasData(date-5, i)}") {{ date-5 }}
                                 .date-empty(v-else-if="date >= 30") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
-                            .has-text-centered.date(v-for="date in 31+4" v-if="i == 9") <!-- October -->
+                            .has-text-centered.date(:class="{'border-1': showGrid}", v-for="date in 31+4" v-if="i == 9") <!-- October -->
                                 .date-fill(v-if="date > 0 && date <= 31", @click="getData(date, i)", :class="{'date-has-data': dateHasData(date, i)}") {{ date }}
                                 .date-empty(v-else-if="date >= 31") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
-                            .has-text-centered.date(v-for="date in 30+5" v-if="i == 10") <!-- November -->
+                            .has-text-centered.date(:class="{'border-1': showGrid}", v-for="date in 30+5" v-if="i == 10") <!-- November -->
                                 .date-fill(v-if="date-3 > 0 && date <= 30+3", @click="getData(date-3, i)", :class="{'date-has-data': dateHasData(date-3, i)}") {{ date-3 }}
                                 .date-empty(v-else-if="date >= 30") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
-                            .has-text-centered.date(v-for="date in 31+11" v-if="i == 11") <!-- December -->
+                            .has-text-centered.date(:class="{'border-1': showGrid}", v-for="date in 31+11" v-if="i == 11") <!-- December -->
                                 .date-fill(v-if="date-5 > 0 && date <= 31+5", @click="getData(date-5, i)", :class="{'date-has-data': dateHasData(date-5, i)}") {{ date-5 }}
                                 .date-empty(v-else-if="date >= 31") {{ '&nbsp;' }}
                                 .date-empty(v-else) {{ '&nbsp;' }}
@@ -161,7 +164,10 @@
                 searchBasedOn: [
                     { text: 'Nama', value: 'name' },
                     { text: 'Tahun Kelahiran', value: 'yearBirth' }
-                ]
+                ],
+                
+                // settings
+                showGrid: true
             }
         },
 
@@ -340,6 +346,11 @@
                     if (this.selectedSearchBased == 'name') return data.name.toLowerCase().indexOf(this.searchText.toLowerCase()) >= 0;
                     else return data.yearBirth.toLowerCase().indexOf(this.searchText.toLowerCase()) >= 0;
                 });
+            },
+
+            switchText() {
+                if (this.showGrid) return 'Sembunyikan Grid';
+                else return 'Tampilkan Grid';
             }
         },
 
@@ -351,6 +362,12 @@
                     this.isAddDataPopupShowing = false;
                     this.newName = '';
                     this.newYearBirth = '';
+                }
+            },
+            
+            showGrid(value) {
+                if (value) {
+                
                 }
             }
         },
@@ -377,7 +394,7 @@
         .card-content
             padding 0
             margin 1.5rem
-            border 1px solid
+            /*border 1px solid*/
     
     .date-5-row
         padding-bottom 4.2rem
@@ -385,11 +402,11 @@
     .date-title
         padding 10px 0
         width 14.28%
-        border 1px solid
+        /*border 1px solid*/
     
     .date
         width 14.28%
-        border 1px solid
+        /*border 1px solid*/
         
         .date-fill
             padding 10px 0

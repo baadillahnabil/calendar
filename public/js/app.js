@@ -1733,6 +1733,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1780,7 +1783,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // search
             searchText: '',
             selectedSearchBased: 'name',
-            searchBasedOn: [{ text: 'Nama', value: 'name' }, { text: 'Tahun Kelahiran', value: 'yearBirth' }]
+            searchBasedOn: [{ text: 'Nama', value: 'name' }, { text: 'Tahun Kelahiran', value: 'yearBirth' }],
+
+            // settings
+            showGrid: true
         };
     },
 
@@ -1958,6 +1964,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return this.allData.filter(function (data) {
                 if (_this5.selectedSearchBased == 'name') return data.name.toLowerCase().indexOf(_this5.searchText.toLowerCase()) >= 0;else return data.yearBirth.toLowerCase().indexOf(_this5.searchText.toLowerCase()) >= 0;
             });
+        },
+        switchText: function switchText() {
+            if (this.showGrid) return 'Sembunyikan Grid';else return 'Tampilkan Grid';
         }
     },
 
@@ -1970,6 +1979,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.newName = '';
                 this.newYearBirth = '';
             }
+        },
+        showGrid: function showGrid(value) {
+            if (value) {}
         }
     },
 
@@ -2058,7 +2070,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.has-item-centered[data-v-bc42c88c] {\n  justify-content: center;\n}\n.bg-primary[data-v-bc42c88c] {\n  background-color: #00d1b2;\n}\n.bg-danger[data-v-bc42c88c] {\n  background-color: #ff3860;\n}\n.bg-warning[data-v-bc42c88c] {\n  background-color: #ffdd57;\n}\n.text-white[data-v-bc42c88c] {\n  color: #fff;\n}\n.is-full-width[data-v-bc42c88c] {\n  width: 100%;\n}\n.component-root[data-v-bc42c88c] {\n  margin: 50px auto;\n}\n.column[data-v-bc42c88c],\nh2[data-v-bc42c88c] {\n  font-weight: bold;\n}\n.card[data-v-bc42c88c] {\n  min-height: 418px;\n}\n.card .card-content[data-v-bc42c88c] {\n  padding: 0;\n  margin: 1.5rem;\n  border: 1px solid;\n}\n.date-5-row[data-v-bc42c88c] {\n  padding-bottom: 4.2rem;\n}\n.date-title[data-v-bc42c88c] {\n  padding: 10px 0;\n  width: 14.28%;\n  border: 1px solid;\n}\n.date[data-v-bc42c88c] {\n  width: 14.28%;\n  border: 1px solid;\n}\n.date .date-fill[data-v-bc42c88c] {\n  padding: 10px 0;\n  cursor: pointer;\n}\n.date .date-fill[data-v-bc42c88c]:hover {\n  background-color: #3273dc;\n  color: #fff;\n}\n.date .date-has-data[data-v-bc42c88c] {\n  background-color: #ff3860;\n  color: #fff;\n}\n.date .date-empty[data-v-bc42c88c] {\n  padding: 10px 0;\n  cursor: no-drop;\n  background-color: #dbdbdb;\n}\n.modal[data-v-bc42c88c] {\n  padding: 10px;\n}\n.modal .modal-card-head[data-v-bc42c88c] {\n  padding: 10px 0;\n}\n.modal .modal-card-body .column[data-v-bc42c88c] {\n  border-bottom: 1px solid #dbdbdb;\n  border-top: 1px solid #dbdbdb;\n}\n", ""]);
+exports.push([module.i, "\n.has-item-centered[data-v-bc42c88c] {\n  justify-content: center;\n}\n.bg-primary[data-v-bc42c88c] {\n  background-color: #00d1b2;\n}\n.bg-danger[data-v-bc42c88c] {\n  background-color: #ff3860;\n}\n.bg-warning[data-v-bc42c88c] {\n  background-color: #ffdd57;\n}\n.text-white[data-v-bc42c88c] {\n  color: #fff;\n}\n.border-1[data-v-bc42c88c] {\n  border: 1px solid;\n}\n.is-full-width[data-v-bc42c88c] {\n  width: 100%;\n}\n.component-root[data-v-bc42c88c] {\n  margin: 50px auto;\n}\n.column[data-v-bc42c88c],\nh2[data-v-bc42c88c] {\n  font-weight: bold;\n}\n.card[data-v-bc42c88c] {\n  min-height: 418px;\n}\n.card .card-content[data-v-bc42c88c] {\n  padding: 0;\n  margin: 1.5rem;\n/*border 1px solid*/\n}\n.date-5-row[data-v-bc42c88c] {\n  padding-bottom: 4.2rem;\n}\n.date-title[data-v-bc42c88c] {\n  padding: 10px 0;\n  width: 14.28%;\n/*border 1px solid*/\n}\n.date[data-v-bc42c88c] {\n  width: 14.28%;\n/*border 1px solid*/\n}\n.date .date-fill[data-v-bc42c88c] {\n  padding: 10px 0;\n  cursor: pointer;\n}\n.date .date-fill[data-v-bc42c88c]:hover {\n  background-color: #3273dc;\n  color: #fff;\n}\n.date .date-has-data[data-v-bc42c88c] {\n  background-color: #ff3860;\n  color: #fff;\n}\n.date .date-empty[data-v-bc42c88c] {\n  padding: 10px 0;\n  cursor: no-drop;\n  background-color: #dbdbdb;\n}\n.modal[data-v-bc42c88c] {\n  padding: 10px;\n}\n.modal .modal-card-head[data-v-bc42c88c] {\n  padding: 10px 0;\n}\n.modal .modal-card-body .column[data-v-bc42c88c] {\n  border-bottom: 1px solid #dbdbdb;\n  border-top: 1px solid #dbdbdb;\n}\n", ""]);
 
 // exports
 
@@ -20106,6 +20118,27 @@ var render = function() {
           )
         ])
       ]),
+      _c("br"),
+      _c(
+        "div",
+        { staticClass: "field" },
+        [
+          _c(
+            "b-switch",
+            {
+              model: {
+                value: _vm.showGrid,
+                callback: function($$v) {
+                  _vm.showGrid = $$v
+                },
+                expression: "showGrid"
+              }
+            },
+            [_vm._v(_vm._s(_vm.switchText))]
+          )
+        ],
+        1
+      ),
       _c("hr"),
       _c(
         "div",
@@ -20126,456 +20159,550 @@ var render = function() {
                     [_vm._v(_vm._s(month))]
                   )
                 ]),
-                _c("div", { staticClass: "card-content" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "columns is-gapless is-multiline is-mobile"
-                    },
-                    [
-                      _vm._l(_vm.days, function(day) {
-                        return _c(
-                          "div",
-                          { staticClass: "has-text-centered date-title" },
-                          [_vm._v(_vm._s(day))]
-                        )
-                      }),
-                      _vm._l(31 + 4, function(date) {
-                        return i == 0
-                          ? _c(
-                              "div",
-                              { staticClass: "has-text-centered date" },
-                              [
-                                date > 0 && date <= 31
-                                  ? _c(
-                                      "div",
-                                      {
-                                        staticClass: "date-fill",
-                                        class: {
-                                          "date-has-data": _vm.dateHasData(
-                                            date,
-                                            i
-                                          )
-                                        },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.getData(date, i)
+                _c(
+                  "div",
+                  {
+                    staticClass: "card-content",
+                    class: { "border-1": _vm.showGrid }
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "columns is-gapless is-multiline is-mobile"
+                      },
+                      [
+                        _vm._l(_vm.days, function(day) {
+                          return _c(
+                            "div",
+                            {
+                              staticClass: "has-text-centered date-title",
+                              class: { "border-1": _vm.showGrid }
+                            },
+                            [_vm._v(_vm._s(day))]
+                          )
+                        }),
+                        _vm._l(31 + 4, function(date) {
+                          return i == 0
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass: "has-text-centered date",
+                                  class: { "border-1": _vm.showGrid }
+                                },
+                                [
+                                  date > 0 && date <= 31
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass: "date-fill",
+                                          class: {
+                                            "date-has-data": _vm.dateHasData(
+                                              date,
+                                              i
+                                            )
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.getData(date, i)
+                                            }
                                           }
-                                        }
-                                      },
-                                      [_vm._v(_vm._s(date))]
-                                    )
-                                  : date >= 31
-                                    ? _c("div", { staticClass: "date-empty" }, [
-                                        _vm._v(_vm._s(" "))
-                                      ])
-                                    : _c("div", { staticClass: "date-empty" }, [
-                                        _vm._v(_vm._s(" "))
-                                      ])
-                              ]
-                            )
-                          : _vm._e()
-                      }),
-                      _vm._l(28 + 7, function(date) {
-                        return i == 1
-                          ? _c(
-                              "div",
-                              { staticClass: "has-text-centered date" },
-                              [
-                                date - 3 > 0 && date <= 28 + 3
-                                  ? _c(
-                                      "div",
-                                      {
-                                        staticClass: "date-fill",
-                                        class: {
-                                          "date-has-data": _vm.dateHasData(
-                                            date - 3,
-                                            i
-                                          )
                                         },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.getData(date - 3, i)
+                                        [_vm._v(_vm._s(date))]
+                                      )
+                                    : date >= 31
+                                      ? _c(
+                                          "div",
+                                          { staticClass: "date-empty" },
+                                          [_vm._v(_vm._s(" "))]
+                                        )
+                                      : _c(
+                                          "div",
+                                          { staticClass: "date-empty" },
+                                          [_vm._v(_vm._s(" "))]
+                                        )
+                                ]
+                              )
+                            : _vm._e()
+                        }),
+                        _vm._l(28 + 7, function(date) {
+                          return i == 1
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass: "has-text-centered date",
+                                  class: { "border-1": _vm.showGrid }
+                                },
+                                [
+                                  date - 3 > 0 && date <= 28 + 3
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass: "date-fill",
+                                          class: {
+                                            "date-has-data": _vm.dateHasData(
+                                              date - 3,
+                                              i
+                                            )
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.getData(date - 3, i)
+                                            }
                                           }
-                                        }
-                                      },
-                                      [_vm._v(_vm._s(date - 3))]
-                                    )
-                                  : date >= 28
-                                    ? _c("div", { staticClass: "date-empty" }, [
-                                        _vm._v(_vm._s(" "))
-                                      ])
-                                    : _c("div", { staticClass: "date-empty" }, [
-                                        _vm._v(_vm._s(" "))
-                                      ])
-                              ]
-                            )
-                          : _vm._e()
-                      }),
-                      _vm._l(31 + 4, function(date) {
-                        return i == 2
-                          ? _c(
-                              "div",
-                              { staticClass: "has-text-centered date" },
-                              [
-                                date - 3 > 0 && date <= 31 + 3
-                                  ? _c(
-                                      "div",
-                                      {
-                                        staticClass: "date-fill",
-                                        class: {
-                                          "date-has-data": _vm.dateHasData(
-                                            date - 3,
-                                            i
-                                          )
                                         },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.getData(date - 3, i)
+                                        [_vm._v(_vm._s(date - 3))]
+                                      )
+                                    : date >= 28
+                                      ? _c(
+                                          "div",
+                                          { staticClass: "date-empty" },
+                                          [_vm._v(_vm._s(" "))]
+                                        )
+                                      : _c(
+                                          "div",
+                                          { staticClass: "date-empty" },
+                                          [_vm._v(_vm._s(" "))]
+                                        )
+                                ]
+                              )
+                            : _vm._e()
+                        }),
+                        _vm._l(31 + 4, function(date) {
+                          return i == 2
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass: "has-text-centered date",
+                                  class: { "border-1": _vm.showGrid }
+                                },
+                                [
+                                  date - 3 > 0 && date <= 31 + 3
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass: "date-fill",
+                                          class: {
+                                            "date-has-data": _vm.dateHasData(
+                                              date - 3,
+                                              i
+                                            )
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.getData(date - 3, i)
+                                            }
                                           }
-                                        }
-                                      },
-                                      [_vm._v(_vm._s(date - 3))]
-                                    )
-                                  : date >= 31
-                                    ? _c("div", { staticClass: "date-empty" }, [
-                                        _vm._v(_vm._s(" "))
-                                      ])
-                                    : _c("div", { staticClass: "date-empty" }, [
-                                        _vm._v(_vm._s(" "))
-                                      ])
-                              ]
-                            )
-                          : _vm._e()
-                      }),
-                      _vm._l(30 + 12, function(date) {
-                        return i == 3
-                          ? _c(
-                              "div",
-                              { staticClass: "has-text-centered date" },
-                              [
-                                date - 6 > 0 && date <= 30 + 6
-                                  ? _c(
-                                      "div",
-                                      {
-                                        staticClass: "date-fill",
-                                        class: {
-                                          "date-has-data": _vm.dateHasData(
-                                            date - 6,
-                                            i
-                                          )
                                         },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.getData(date - 6, i)
+                                        [_vm._v(_vm._s(date - 3))]
+                                      )
+                                    : date >= 31
+                                      ? _c(
+                                          "div",
+                                          { staticClass: "date-empty" },
+                                          [_vm._v(_vm._s(" "))]
+                                        )
+                                      : _c(
+                                          "div",
+                                          { staticClass: "date-empty" },
+                                          [_vm._v(_vm._s(" "))]
+                                        )
+                                ]
+                              )
+                            : _vm._e()
+                        }),
+                        _vm._l(30 + 12, function(date) {
+                          return i == 3
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass: "has-text-centered date",
+                                  class: { "border-1": _vm.showGrid }
+                                },
+                                [
+                                  date - 6 > 0 && date <= 30 + 6
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass: "date-fill",
+                                          class: {
+                                            "date-has-data": _vm.dateHasData(
+                                              date - 6,
+                                              i
+                                            )
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.getData(date - 6, i)
+                                            }
                                           }
-                                        }
-                                      },
-                                      [_vm._v(_vm._s(date - 6))]
-                                    )
-                                  : date >= 30
-                                    ? _c("div", { staticClass: "date-empty" }, [
-                                        _vm._v(_vm._s(" "))
-                                      ])
-                                    : _c("div", { staticClass: "date-empty" }, [
-                                        _vm._v(_vm._s(" "))
-                                      ])
-                              ]
-                            )
-                          : _vm._e()
-                      }),
-                      _vm._l(31 + 4, function(date) {
-                        return i == 4
-                          ? _c(
-                              "div",
-                              { staticClass: "has-text-centered date" },
-                              [
-                                date - 1 > 0 && date <= 31 + 1
-                                  ? _c(
-                                      "div",
-                                      {
-                                        staticClass: "date-fill",
-                                        class: {
-                                          "date-has-data": _vm.dateHasData(
-                                            date - 1,
-                                            i
-                                          )
                                         },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.getData(date - 1, i)
+                                        [_vm._v(_vm._s(date - 6))]
+                                      )
+                                    : date >= 30
+                                      ? _c(
+                                          "div",
+                                          { staticClass: "date-empty" },
+                                          [_vm._v(_vm._s(" "))]
+                                        )
+                                      : _c(
+                                          "div",
+                                          { staticClass: "date-empty" },
+                                          [_vm._v(_vm._s(" "))]
+                                        )
+                                ]
+                              )
+                            : _vm._e()
+                        }),
+                        _vm._l(31 + 4, function(date) {
+                          return i == 4
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass: "has-text-centered date",
+                                  class: { "border-1": _vm.showGrid }
+                                },
+                                [
+                                  date - 1 > 0 && date <= 31 + 1
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass: "date-fill",
+                                          class: {
+                                            "date-has-data": _vm.dateHasData(
+                                              date - 1,
+                                              i
+                                            )
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.getData(date - 1, i)
+                                            }
                                           }
-                                        }
-                                      },
-                                      [_vm._v(_vm._s(date - 1))]
-                                    )
-                                  : date >= 31
-                                    ? _c("div", { staticClass: "date-empty" }, [
-                                        _vm._v(_vm._s(" "))
-                                      ])
-                                    : _c("div", { staticClass: "date-empty" }, [
-                                        _vm._v(_vm._s(" "))
-                                      ])
-                              ]
-                            )
-                          : _vm._e()
-                      }),
-                      _vm._l(30 + 5, function(date) {
-                        return i == 5
-                          ? _c(
-                              "div",
-                              { staticClass: "has-text-centered date" },
-                              [
-                                date - 4 > 0 && date <= 30 + 4
-                                  ? _c(
-                                      "div",
-                                      {
-                                        staticClass: "date-fill",
-                                        class: {
-                                          "date-has-data": _vm.dateHasData(
-                                            date - 4,
-                                            i
-                                          )
                                         },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.getData(date - 4, i)
+                                        [_vm._v(_vm._s(date - 1))]
+                                      )
+                                    : date >= 31
+                                      ? _c(
+                                          "div",
+                                          { staticClass: "date-empty" },
+                                          [_vm._v(_vm._s(" "))]
+                                        )
+                                      : _c(
+                                          "div",
+                                          { staticClass: "date-empty" },
+                                          [_vm._v(_vm._s(" "))]
+                                        )
+                                ]
+                              )
+                            : _vm._e()
+                        }),
+                        _vm._l(30 + 5, function(date) {
+                          return i == 5
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass: "has-text-centered date",
+                                  class: { "border-1": _vm.showGrid }
+                                },
+                                [
+                                  date - 4 > 0 && date <= 30 + 4
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass: "date-fill",
+                                          class: {
+                                            "date-has-data": _vm.dateHasData(
+                                              date - 4,
+                                              i
+                                            )
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.getData(date - 4, i)
+                                            }
                                           }
-                                        }
-                                      },
-                                      [_vm._v(_vm._s(date - 4))]
-                                    )
-                                  : date >= 30
-                                    ? _c("div", { staticClass: "date-empty" }, [
-                                        _vm._v(_vm._s(" "))
-                                      ])
-                                    : _c("div", { staticClass: "date-empty" }, [
-                                        _vm._v(_vm._s(" "))
-                                      ])
-                              ]
-                            )
-                          : _vm._e()
-                      }),
-                      _vm._l(31 + 11, function(date) {
-                        return i == 6
-                          ? _c(
-                              "div",
-                              { staticClass: "has-text-centered date" },
-                              [
-                                date - 6 > 0 && date <= 31 + 6
-                                  ? _c(
-                                      "div",
-                                      {
-                                        staticClass: "date-fill",
-                                        class: {
-                                          "date-has-data": _vm.dateHasData(
-                                            date - 6,
-                                            i
-                                          )
                                         },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.getData(date - 6, i)
+                                        [_vm._v(_vm._s(date - 4))]
+                                      )
+                                    : date >= 30
+                                      ? _c(
+                                          "div",
+                                          { staticClass: "date-empty" },
+                                          [_vm._v(_vm._s(" "))]
+                                        )
+                                      : _c(
+                                          "div",
+                                          { staticClass: "date-empty" },
+                                          [_vm._v(_vm._s(" "))]
+                                        )
+                                ]
+                              )
+                            : _vm._e()
+                        }),
+                        _vm._l(31 + 11, function(date) {
+                          return i == 6
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass: "has-text-centered date",
+                                  class: { "border-1": _vm.showGrid }
+                                },
+                                [
+                                  date - 6 > 0 && date <= 31 + 6
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass: "date-fill",
+                                          class: {
+                                            "date-has-data": _vm.dateHasData(
+                                              date - 6,
+                                              i
+                                            )
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.getData(date - 6, i)
+                                            }
                                           }
-                                        }
-                                      },
-                                      [_vm._v(_vm._s(date - 6))]
-                                    )
-                                  : date >= 31
-                                    ? _c("div", { staticClass: "date-empty" }, [
-                                        _vm._v(_vm._s(" "))
-                                      ])
-                                    : _c("div", { staticClass: "date-empty" }, [
-                                        _vm._v(_vm._s(" "))
-                                      ])
-                              ]
-                            )
-                          : _vm._e()
-                      }),
-                      _vm._l(31 + 4, function(date) {
-                        return i == 7
-                          ? _c(
-                              "div",
-                              { staticClass: "has-text-centered date" },
-                              [
-                                date - 2 > 0 && date <= 31 + 2
-                                  ? _c(
-                                      "div",
-                                      {
-                                        staticClass: "date-fill",
-                                        class: {
-                                          "date-has-data": _vm.dateHasData(
-                                            date - 2,
-                                            i
-                                          )
                                         },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.getData(date - 2, i)
+                                        [_vm._v(_vm._s(date - 6))]
+                                      )
+                                    : date >= 31
+                                      ? _c(
+                                          "div",
+                                          { staticClass: "date-empty" },
+                                          [_vm._v(_vm._s(" "))]
+                                        )
+                                      : _c(
+                                          "div",
+                                          { staticClass: "date-empty" },
+                                          [_vm._v(_vm._s(" "))]
+                                        )
+                                ]
+                              )
+                            : _vm._e()
+                        }),
+                        _vm._l(31 + 4, function(date) {
+                          return i == 7
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass: "has-text-centered date",
+                                  class: { "border-1": _vm.showGrid }
+                                },
+                                [
+                                  date - 2 > 0 && date <= 31 + 2
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass: "date-fill",
+                                          class: {
+                                            "date-has-data": _vm.dateHasData(
+                                              date - 2,
+                                              i
+                                            )
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.getData(date - 2, i)
+                                            }
                                           }
-                                        }
-                                      },
-                                      [_vm._v(_vm._s(date - 2))]
-                                    )
-                                  : date >= 31
-                                    ? _c("div", { staticClass: "date-empty" }, [
-                                        _vm._v(_vm._s(" "))
-                                      ])
-                                    : _c("div", { staticClass: "date-empty" }, [
-                                        _vm._v(_vm._s(" "))
-                                      ])
-                              ]
-                            )
-                          : _vm._e()
-                      }),
-                      _vm._l(30 + 5, function(date) {
-                        return i == 8
-                          ? _c(
-                              "div",
-                              { staticClass: "has-text-centered date" },
-                              [
-                                date - 5 > 0 && date <= 30 + 5
-                                  ? _c(
-                                      "div",
-                                      {
-                                        staticClass: "date-fill",
-                                        class: {
-                                          "date-has-data": _vm.dateHasData(
-                                            date - 5,
-                                            i
-                                          )
                                         },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.getData(date - 5, i)
+                                        [_vm._v(_vm._s(date - 2))]
+                                      )
+                                    : date >= 31
+                                      ? _c(
+                                          "div",
+                                          { staticClass: "date-empty" },
+                                          [_vm._v(_vm._s(" "))]
+                                        )
+                                      : _c(
+                                          "div",
+                                          { staticClass: "date-empty" },
+                                          [_vm._v(_vm._s(" "))]
+                                        )
+                                ]
+                              )
+                            : _vm._e()
+                        }),
+                        _vm._l(30 + 5, function(date) {
+                          return i == 8
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass: "has-text-centered date",
+                                  class: { "border-1": _vm.showGrid }
+                                },
+                                [
+                                  date - 5 > 0 && date <= 30 + 5
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass: "date-fill",
+                                          class: {
+                                            "date-has-data": _vm.dateHasData(
+                                              date - 5,
+                                              i
+                                            )
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.getData(date - 5, i)
+                                            }
                                           }
-                                        }
-                                      },
-                                      [_vm._v(_vm._s(date - 5))]
-                                    )
-                                  : date >= 30
-                                    ? _c("div", { staticClass: "date-empty" }, [
-                                        _vm._v(_vm._s(" "))
-                                      ])
-                                    : _c("div", { staticClass: "date-empty" }, [
-                                        _vm._v(_vm._s(" "))
-                                      ])
-                              ]
-                            )
-                          : _vm._e()
-                      }),
-                      _vm._l(31 + 4, function(date) {
-                        return i == 9
-                          ? _c(
-                              "div",
-                              { staticClass: "has-text-centered date" },
-                              [
-                                date > 0 && date <= 31
-                                  ? _c(
-                                      "div",
-                                      {
-                                        staticClass: "date-fill",
-                                        class: {
-                                          "date-has-data": _vm.dateHasData(
-                                            date,
-                                            i
-                                          )
                                         },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.getData(date, i)
+                                        [_vm._v(_vm._s(date - 5))]
+                                      )
+                                    : date >= 30
+                                      ? _c(
+                                          "div",
+                                          { staticClass: "date-empty" },
+                                          [_vm._v(_vm._s(" "))]
+                                        )
+                                      : _c(
+                                          "div",
+                                          { staticClass: "date-empty" },
+                                          [_vm._v(_vm._s(" "))]
+                                        )
+                                ]
+                              )
+                            : _vm._e()
+                        }),
+                        _vm._l(31 + 4, function(date) {
+                          return i == 9
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass: "has-text-centered date",
+                                  class: { "border-1": _vm.showGrid }
+                                },
+                                [
+                                  date > 0 && date <= 31
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass: "date-fill",
+                                          class: {
+                                            "date-has-data": _vm.dateHasData(
+                                              date,
+                                              i
+                                            )
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.getData(date, i)
+                                            }
                                           }
-                                        }
-                                      },
-                                      [_vm._v(_vm._s(date))]
-                                    )
-                                  : date >= 31
-                                    ? _c("div", { staticClass: "date-empty" }, [
-                                        _vm._v(_vm._s(" "))
-                                      ])
-                                    : _c("div", { staticClass: "date-empty" }, [
-                                        _vm._v(_vm._s(" "))
-                                      ])
-                              ]
-                            )
-                          : _vm._e()
-                      }),
-                      _vm._l(30 + 5, function(date) {
-                        return i == 10
-                          ? _c(
-                              "div",
-                              { staticClass: "has-text-centered date" },
-                              [
-                                date - 3 > 0 && date <= 30 + 3
-                                  ? _c(
-                                      "div",
-                                      {
-                                        staticClass: "date-fill",
-                                        class: {
-                                          "date-has-data": _vm.dateHasData(
-                                            date - 3,
-                                            i
-                                          )
                                         },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.getData(date - 3, i)
+                                        [_vm._v(_vm._s(date))]
+                                      )
+                                    : date >= 31
+                                      ? _c(
+                                          "div",
+                                          { staticClass: "date-empty" },
+                                          [_vm._v(_vm._s(" "))]
+                                        )
+                                      : _c(
+                                          "div",
+                                          { staticClass: "date-empty" },
+                                          [_vm._v(_vm._s(" "))]
+                                        )
+                                ]
+                              )
+                            : _vm._e()
+                        }),
+                        _vm._l(30 + 5, function(date) {
+                          return i == 10
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass: "has-text-centered date",
+                                  class: { "border-1": _vm.showGrid }
+                                },
+                                [
+                                  date - 3 > 0 && date <= 30 + 3
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass: "date-fill",
+                                          class: {
+                                            "date-has-data": _vm.dateHasData(
+                                              date - 3,
+                                              i
+                                            )
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.getData(date - 3, i)
+                                            }
                                           }
-                                        }
-                                      },
-                                      [_vm._v(_vm._s(date - 3))]
-                                    )
-                                  : date >= 30
-                                    ? _c("div", { staticClass: "date-empty" }, [
-                                        _vm._v(_vm._s(" "))
-                                      ])
-                                    : _c("div", { staticClass: "date-empty" }, [
-                                        _vm._v(_vm._s(" "))
-                                      ])
-                              ]
-                            )
-                          : _vm._e()
-                      }),
-                      _vm._l(31 + 11, function(date) {
-                        return i == 11
-                          ? _c(
-                              "div",
-                              { staticClass: "has-text-centered date" },
-                              [
-                                date - 5 > 0 && date <= 31 + 5
-                                  ? _c(
-                                      "div",
-                                      {
-                                        staticClass: "date-fill",
-                                        class: {
-                                          "date-has-data": _vm.dateHasData(
-                                            date - 5,
-                                            i
-                                          )
                                         },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.getData(date - 5, i)
+                                        [_vm._v(_vm._s(date - 3))]
+                                      )
+                                    : date >= 30
+                                      ? _c(
+                                          "div",
+                                          { staticClass: "date-empty" },
+                                          [_vm._v(_vm._s(" "))]
+                                        )
+                                      : _c(
+                                          "div",
+                                          { staticClass: "date-empty" },
+                                          [_vm._v(_vm._s(" "))]
+                                        )
+                                ]
+                              )
+                            : _vm._e()
+                        }),
+                        _vm._l(31 + 11, function(date) {
+                          return i == 11
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass: "has-text-centered date",
+                                  class: { "border-1": _vm.showGrid }
+                                },
+                                [
+                                  date - 5 > 0 && date <= 31 + 5
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass: "date-fill",
+                                          class: {
+                                            "date-has-data": _vm.dateHasData(
+                                              date - 5,
+                                              i
+                                            )
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.getData(date - 5, i)
+                                            }
                                           }
-                                        }
-                                      },
-                                      [_vm._v(_vm._s(date - 5))]
-                                    )
-                                  : date >= 31
-                                    ? _c("div", { staticClass: "date-empty" }, [
-                                        _vm._v(_vm._s(" "))
-                                      ])
-                                    : _c("div", { staticClass: "date-empty" }, [
-                                        _vm._v(_vm._s(" "))
-                                      ])
-                              ]
-                            )
-                          : _vm._e()
-                      })
-                    ],
-                    2
-                  )
-                ])
+                                        },
+                                        [_vm._v(_vm._s(date - 5))]
+                                      )
+                                    : date >= 31
+                                      ? _c(
+                                          "div",
+                                          { staticClass: "date-empty" },
+                                          [_vm._v(_vm._s(" "))]
+                                        )
+                                      : _c(
+                                          "div",
+                                          { staticClass: "date-empty" },
+                                          [_vm._v(_vm._s(" "))]
+                                        )
+                                ]
+                              )
+                            : _vm._e()
+                        })
+                      ],
+                      2
+                    )
+                  ]
+                )
               ])
             ]
           )
