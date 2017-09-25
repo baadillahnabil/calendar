@@ -2,6 +2,18 @@
     .component-root.container
         h2.has-text-centered Calendar 2017
         hr
+        .field.has-addons
+            .control
+                .button.is-static.is-hidden-mobile Cari Berdasarkan :
+            .control
+                span.select
+                    select(v-model="selectedSearchBased")
+                        option(v-for="option in searchBasedOn", :value="option.value") {{ option.text }}
+            .control.is-expanded
+                input.input(placeholder='Cari disini, lalu tekan \'Enter\' atau tombol \'Cari\'', v-model.lazy="searchText", @keyup.enter="search")
+            .control
+                a.button.is-success(@click="search") Cari
+        hr
         .columns.is-multiline.is-gapless
             .column.is-one-third.has-text-centered(v-for="(month, i) in months")
                 .card
@@ -63,22 +75,23 @@
         b-modal(:active.sync="isDatePopupShowing", has-modal-card=true, :canCancel="canCancel")
             .modal-card
                 .modal-card-head.bg-primary.is-radiusless
-                    .modal-card-title.has-text-centered.text-white {{ daySelected }} {{ months[monthSelected] }} 2017
+                    .modal-card-title.has-text-centered.text-white {{ modalTitle }}
                 .modal-card-body
                     b-table(:data='isTableEmpty ? [] : eachDayData', :bordered='isTableBordered', :striped='isTableStriped', :narrowed='isTableNarrowed', :loading='isTableLoading', :mobile-cards='hasMobileCards')
                         template(scope='props')
-                            b-table-column(label='No', width='40') {{ props.row.id }}
+                            b-table-column(label='No', width='40', v-if="showOpsi") {{ props.row.id }}
                             b-table-column(label='Nama') {{ props.row.name }}
                             b-table-column(label='Tahun Kelahiran') {{ props.row.yearBirth }}
-                            b-table-column(label='Opsi')
+                            b-table-column(label='Pada Tanggal', v-if="!showOpsi") {{ props.row.day }} {{ months[props.row.month - 1] }} 2017
+                            b-table-column(label='Opsi' v-if="showOpsi")
                                 .field.is-grouped
                                     .control
                                         a.button.is-warning.is-small(@click="btnEditClicked(props.row.id, props.row.name, props.row.yearBirth)") Ubah
                                     .control
                                         a.button.is-danger.is-small(@click="deleteData(props.row.id, daySelected, monthSelected)") Hapus
                         template(slot='empty')
-                            .content.has-text-grey.has-text-centered Tidak Ada Data Pada Tanggal Ini
-                .modal-card-foot.is-radiusless.is-paddingless
+                            .content.has-text-grey.has-text-centered {{ noDataText }}
+                .modal-card-foot.is-radiusless.is-paddingless(v-if="showOpsi")
                     a.button.is-success.is-full-width(@click="isAddDataPopupShowing = true; isUseForAddData = true;") Tambah Data
         
         // Add or Edit Data Modal
@@ -87,9 +100,9 @@
                 .modal-card-body
                     b-field(grouped)
                         b-field(label='Nama', expanded)
-                            b-input(v-model="newName")
+                            b-input(v-model.lazy="newName")
                         b-field(label='Tahun Kelahiran', expanded)
-                            b-input(type="number", v-model="newYearBirth")
+                            b-input(type="number", v-model.lazy="newYearBirth")
                 .modal-card-foot.is-radiusless.is-paddingless
                     a.button.is-success.is-marginless.is-radiusless.is-full-width(@click="isUseForAddData ? (addData(daySelected, monthSelected)) : (editData(rowIdSelected, daySelected, monthSelected))") {{ isUseForAddData ? 'Tambahkan' : 'Simpan' }}
                     a.button.is-danger.is-marginless.is-radiusless.is-full-width(@click="isAddDataPopupShowing = false") Batal
@@ -129,6 +142,7 @@
                 isTableNarrowed: false,
                 isTableLoading: false,
                 hasMobileCards: true,
+                showOpsi: true,
                 rowIdSelected: 0,
 
                 // Modal Add or Edit Data
@@ -139,7 +153,15 @@
 
                 // loading data
                 isLoading: false,
-                canCancelLoading: false
+                canCancelLoading: false,
+
+                // search
+                searchText: '',
+                selectedSearchBased: 'name',
+                searchBasedOn: [
+                    { text: 'Nama', value: 'name' },
+                    { text: 'Tahun Kelahiran', value: 'yearBirth' }
+                ]
             }
         },
 
@@ -201,6 +223,7 @@
                         this.eachDayData.push(data);
                     }
                 }
+                this.showOpsi = true;
                 this.isDatePopupShowing = true;
             },
 
@@ -275,6 +298,13 @@
                 });
             },
 
+            search() {
+                this.showOpsi = false;
+                this.isDatePopupShowing = true;
+
+                this.eachDayData = this.searchedData;
+            },
+
             // snackbar
             snackbar(message, type, position) {
                 this.$snackbar.open({
@@ -289,6 +319,28 @@
                 this.$toast.open(message);
             },
 
+        },
+
+        computed: {
+            modalTitle() {
+                if (!this.showOpsi) {
+                    if (this.selectedSearchBased == 'name') return `Nama : '${this.searchText}'`;
+                    else return `Tahun Kelahiran : '${this.searchText}'`;
+                }
+                else return `${this.daySelected} ${this.months[this.monthSelected]} 2017`;
+            },
+
+            noDataText() {
+                if (this.showOpsi) return 'Tidak Ada Data Pada Tanggal Ini';
+                else return 'Tidak Ada Data Pada Pencarian Ini';
+            },
+
+            searchedData() {
+                return this.allData.filter((data) => {
+                    if (this.selectedSearchBased == 'name') return data.name.toLowerCase().indexOf(this.searchText.toLowerCase()) >= 0;
+                    else return data.yearBirth.toLowerCase().indexOf(this.searchText.toLowerCase()) >= 0;
+                });
+            }
         },
 
         watch: {

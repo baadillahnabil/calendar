@@ -1720,6 +1720,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1751,6 +1764,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             isTableNarrowed: false,
             isTableLoading: false,
             hasMobileCards: true,
+            showOpsi: true,
             rowIdSelected: 0,
 
             // Modal Add or Edit Data
@@ -1761,7 +1775,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             // loading data
             isLoading: false,
-            canCancelLoading: false
+            canCancelLoading: false,
+
+            // search
+            searchText: '',
+            selectedSearchBased: 'name',
+            searchBasedOn: [{ text: 'Nama', value: 'name' }, { text: 'Tahun Kelahiran', value: 'yearBirth' }]
         };
     },
 
@@ -1824,6 +1843,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     this.eachDayData.push(data);
                 }
             }
+            this.showOpsi = true;
             this.isDatePopupShowing = true;
         },
         addData: function addData(day, month) {
@@ -1899,6 +1919,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.error(err);
             });
         },
+        search: function search() {
+            this.showOpsi = false;
+            this.isDatePopupShowing = true;
+
+            this.eachDayData = this.searchedData;
+        },
 
 
         // snackbar
@@ -1914,6 +1940,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         // toast
         toast: function toast(message) {
             this.$toast.open(message);
+        }
+    },
+
+    computed: {
+        modalTitle: function modalTitle() {
+            if (!this.showOpsi) {
+                if (this.selectedSearchBased == 'name') return 'Nama : \'' + this.searchText + '\'';else return 'Tahun Kelahiran : \'' + this.searchText + '\'';
+            } else return this.daySelected + ' ' + this.months[this.monthSelected] + ' 2017';
+        },
+        noDataText: function noDataText() {
+            if (this.showOpsi) return 'Tidak Ada Data Pada Tanggal Ini';else return 'Tidak Ada Data Pada Pencarian Ini';
+        },
+        searchedData: function searchedData() {
+            var _this5 = this;
+
+            return this.allData.filter(function (data) {
+                if (_this5.selectedSearchBased == 'name') return data.name.toLowerCase().indexOf(_this5.searchText.toLowerCase()) >= 0;else return data.yearBirth.toLowerCase().indexOf(_this5.searchText.toLowerCase()) >= 0;
+            });
         }
     },
 
@@ -19983,6 +20027,86 @@ var render = function() {
     [
       _c("h2", { staticClass: "has-text-centered" }, [_vm._v("Calendar 2017")]),
       _c("hr"),
+      _c("div", { staticClass: "field has-addons" }, [
+        _vm._m(0),
+        _c("div", { staticClass: "control" }, [
+          _c("span", { staticClass: "select" }, [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.selectedSearchBased,
+                    expression: "selectedSearchBased"
+                  }
+                ],
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.selectedSearchBased = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              _vm._l(_vm.searchBasedOn, function(option) {
+                return _c("option", { domProps: { value: option.value } }, [
+                  _vm._v(_vm._s(option.text))
+                ])
+              })
+            )
+          ])
+        ]),
+        _c("div", { staticClass: "control is-expanded" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model.lazy",
+                value: _vm.searchText,
+                expression: "searchText",
+                modifiers: { lazy: true }
+              }
+            ],
+            staticClass: "input",
+            attrs: {
+              placeholder: "Cari disini, lalu tekan 'Enter' atau tombol 'Cari'"
+            },
+            domProps: { value: _vm.searchText },
+            on: {
+              keyup: function($event) {
+                if (
+                  !("button" in $event) &&
+                  _vm._k($event.keyCode, "enter", 13)
+                ) {
+                  return null
+                }
+                _vm.search($event)
+              },
+              change: function($event) {
+                _vm.searchText = $event.target.value
+              }
+            }
+          })
+        ]),
+        _c("div", { staticClass: "control" }, [
+          _c(
+            "a",
+            { staticClass: "button is-success", on: { click: _vm.search } },
+            [_vm._v("Cari")]
+          )
+        ])
+      ]),
+      _c("hr"),
       _c(
         "div",
         { staticClass: "columns is-multiline is-gapless" },
@@ -20482,14 +20606,7 @@ var render = function() {
                   {
                     staticClass: "modal-card-title has-text-centered text-white"
                   },
-                  [
-                    _vm._v(
-                      _vm._s(_vm.daySelected) +
-                        " " +
-                        _vm._s(_vm.months[_vm.monthSelected]) +
-                        " 2017"
-                    )
-                  ]
+                  [_vm._v(_vm._s(_vm.modalTitle))]
                 )
               ]
             ),
@@ -20513,11 +20630,13 @@ var render = function() {
                         key: "default",
                         fn: function(props) {
                           return [
-                            _c(
-                              "b-table-column",
-                              { attrs: { label: "No", width: "40" } },
-                              [_vm._v(_vm._s(props.row.id))]
-                            ),
+                            _vm.showOpsi
+                              ? _c(
+                                  "b-table-column",
+                                  { attrs: { label: "No", width: "40" } },
+                                  [_vm._v(_vm._s(props.row.id))]
+                                )
+                              : _vm._e(),
                             _c("b-table-column", { attrs: { label: "Nama" } }, [
                               _vm._v(_vm._s(props.row.name))
                             ]),
@@ -20526,46 +20645,74 @@ var render = function() {
                               { attrs: { label: "Tahun Kelahiran" } },
                               [_vm._v(_vm._s(props.row.yearBirth))]
                             ),
-                            _c("b-table-column", { attrs: { label: "Opsi" } }, [
-                              _c("div", { staticClass: "field is-grouped" }, [
-                                _c("div", { staticClass: "control" }, [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "button is-warning is-small",
-                                      on: {
-                                        click: function($event) {
-                                          _vm.btnEditClicked(
-                                            props.row.id,
-                                            props.row.name,
-                                            props.row.yearBirth
+                            !_vm.showOpsi
+                              ? _c(
+                                  "b-table-column",
+                                  { attrs: { label: "Pada Tanggal" } },
+                                  [
+                                    _vm._v(
+                                      _vm._s(props.row.day) +
+                                        " " +
+                                        _vm._s(
+                                          _vm.months[props.row.month - 1]
+                                        ) +
+                                        " 2017"
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm.showOpsi
+                              ? _c(
+                                  "b-table-column",
+                                  { attrs: { label: "Opsi" } },
+                                  [
+                                    _c(
+                                      "div",
+                                      { staticClass: "field is-grouped" },
+                                      [
+                                        _c("div", { staticClass: "control" }, [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "button is-warning is-small",
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.btnEditClicked(
+                                                    props.row.id,
+                                                    props.row.name,
+                                                    props.row.yearBirth
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Ubah")]
                                           )
-                                        }
-                                      }
-                                    },
-                                    [_vm._v("Ubah")]
-                                  )
-                                ]),
-                                _c("div", { staticClass: "control" }, [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "button is-danger is-small",
-                                      on: {
-                                        click: function($event) {
-                                          _vm.deleteData(
-                                            props.row.id,
-                                            _vm.daySelected,
-                                            _vm.monthSelected
+                                        ]),
+                                        _c("div", { staticClass: "control" }, [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "button is-danger is-small",
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.deleteData(
+                                                    props.row.id,
+                                                    _vm.daySelected,
+                                                    _vm.monthSelected
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Hapus")]
                                           )
-                                        }
-                                      }
-                                    },
-                                    [_vm._v("Hapus")]
-                                  )
-                                ])
-                              ])
-                            ])
+                                        ])
+                                      ]
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
                           ]
                         }
                       }
@@ -20582,7 +20729,7 @@ var render = function() {
                             staticClass:
                               "content has-text-grey has-text-centered"
                           },
-                          [_vm._v("Tidak Ada Data Pada Tanggal Ini")]
+                          [_vm._v(_vm._s(_vm.noDataText))]
                         )
                       ]
                     )
@@ -20592,25 +20739,29 @@ var render = function() {
               ],
               1
             ),
-            _c(
-              "div",
-              { staticClass: "modal-card-foot is-radiusless is-paddingless" },
-              [
-                _c(
-                  "a",
+            _vm.showOpsi
+              ? _c(
+                  "div",
                   {
-                    staticClass: "button is-success is-full-width",
-                    on: {
-                      click: function($event) {
-                        _vm.isAddDataPopupShowing = true
-                        _vm.isUseForAddData = true
-                      }
-                    }
+                    staticClass: "modal-card-foot is-radiusless is-paddingless"
                   },
-                  [_vm._v("Tambah Data")]
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "button is-success is-full-width",
+                        on: {
+                          click: function($event) {
+                            _vm.isAddDataPopupShowing = true
+                            _vm.isUseForAddData = true
+                          }
+                        }
+                      },
+                      [_vm._v("Tambah Data")]
+                    )
+                  ]
                 )
-              ]
-            )
+              : _vm._e()
           ])
         ]
       ),
@@ -20735,7 +20886,18 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "control" }, [
+      _c("div", { staticClass: "button is-static is-hidden-mobile" }, [
+        _vm._v("Cari Berdasarkan :")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
