@@ -39,9 +39,18 @@ class PeopleController extends Controller
         return 'Data Added Successfully';
     }
 
-    public function edit($day, $month, $people_id)
+    public function edit(Request $request)
     {
-        //
+        $path = 'storage/' . $request->day . '-' . $request->month . '-2017.txt';
+        $row_id = $request->rowId - 1;
+
+        $data = file($path); //file in to an array
+        $data[$row_id] = $request->name . '|' . $request->yearBirth . PHP_EOL;
+
+        $new_data = implode('', $data);
+        file_put_contents(public_path($path), $new_data, LOCK_EX);
+
+        return 'Data Edited Successfully';
     }
 
     public function destroy(Request $request)

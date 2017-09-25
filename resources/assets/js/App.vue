@@ -73,25 +73,25 @@
                             b-table-column(label='Opsi')
                                 .field.is-grouped
                                     .control
-                                        a.button.is-warning.is-small Ubah
+                                        a.button.is-warning.is-small(@click="btnEditClicked(props.row.id, props.row.name, props.row.yearBirth)") Ubah
                                     .control
                                         a.button.is-danger.is-small(@click="deleteData(props.row.id, daySelected, monthSelected)") Hapus
                         template(slot='empty')
                             .content.has-text-grey.has-text-centered Tidak Ada Data Pada Tanggal Ini
                 .modal-card-foot.is-radiusless.is-paddingless
-                    a.button.is-success.is-full-width(@click="isAddDataPopupShowing = true") Tambah Data
+                    a.button.is-success.is-full-width(@click="isAddDataPopupShowing = true; isUseForAddData = true;") Tambah Data
         
-        // Add Data Modal
+        // Add or Edit Data Modal
         b-modal(:active.sync="isAddDataPopupShowing", has-modal-card=true, :canCancel="canCancel")
             .modal-card
                 .modal-card-body
                     b-field(grouped)
                         b-field(label='Nama', expanded)
-                            b-input(v-model="newName", ref="inputNewName")
+                            b-input(v-model="newName")
                         b-field(label='Tahun Kelahiran', expanded)
                             b-input(type="number", v-model="newYearBirth")
                 .modal-card-foot.is-radiusless.is-paddingless
-                    a.button.is-success.is-marginless.is-radiusless.is-full-width(@click="addData(daySelected, monthSelected)") Tambahkan
+                    a.button.is-success.is-marginless.is-radiusless.is-full-width(@click="isUseForAddData ? (addData(daySelected, monthSelected)) : (editData(rowIdSelected, daySelected, monthSelected))") {{ isUseForAddData ? 'Tambahkan' : 'Simpan' }}
                     a.button.is-danger.is-marginless.is-radiusless.is-full-width(@click="isAddDataPopupShowing = false") Batal
         
         b-loading(:active.sync="isLoading", :canCancel="canCancelLoading")
@@ -99,11 +99,10 @@
 </template>
 
 <script>
-    import BField from "buefy/src/components/field/Field";
 
     export default {
-        components: { BField },
         name: 'app',
+
         data() {
             const months = ['January', 'February', 'March', 'April', 'Mei', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -130,9 +129,11 @@
                 isTableNarrowed: false,
                 isTableLoading: false,
                 hasMobileCards: true,
+                rowIdSelected: 0,
 
-                // Add Data
+                // Modal Add or Edit Data
                 isAddDataPopupShowing: false,
+                isUseForAddData: true,
                 newName: '',
                 newYearBirth: '',
 
@@ -141,7 +142,9 @@
                 canCancelLoading: false
             }
         },
+
         methods: {
+
             getAllData() {
                 this.allData = [];
                 this.isLoading = true;
@@ -216,6 +219,36 @@
 
                     this.isLoading = false;
                     this.toast('Data berhasil di tambahkan');
+                }).catch((err) => {
+                    this.isLoading = false;
+                    console.error(err);
+                });
+            },
+
+            btnEditClicked(id, currentName, currentYearBirth) {
+                this.isAddDataPopupShowing = true;
+                this.isUseForAddData = false;
+                this.rowIdSelected = id;
+                this.newName = currentName;
+                this.newYearBirth = currentYearBirth;
+            },
+
+            editData(rowId, day, month) {
+                this.isLoading = true;
+
+                axios.post('people/edit', {
+                    rowId,
+                    day,
+                    month: month + 1,
+                    name: this.newName,
+                    yearBirth: this.newYearBirth
+                }).then(() => {
+                    this.getAllData();
+                    this.isAddDataPopupShowing = false;
+                    this.isDatePopupShowing = false;
+
+                    this.isLoading = false;
+                    this.toast('Data berhasil di ubah');
                 }).catch((err) => {
                     this.isLoading = false;
                     console.error(err);
