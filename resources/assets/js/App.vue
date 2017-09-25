@@ -202,7 +202,6 @@
             },
 
             addData(day, month) {
-                console.log(`Add New Data With Name ${this.newName} and Year Birth ${this.newYearBirth} in Day ${day} - Month ${month + 1}`);
                 this.isLoading = true;
 
                 axios.post('people/add', {
@@ -224,7 +223,6 @@
             },
 
             deleteData(rowId, day, month) {
-                console.log(`Row ID = ${rowId} || Day = ${day} || Month = ${month + 1}`);
                 this.isLoading = true;
 
                 axios.post('people/delete', {

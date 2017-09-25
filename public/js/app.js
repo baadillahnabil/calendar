@@ -1944,7 +1944,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         addData: function addData(day, month) {
             var _this2 = this;
 
-            console.log('Add New Data With Name ' + this.newName + ' and Year Birth ' + this.newYearBirth + ' in Day ' + day + ' - Month ' + (month + 1));
             this.isLoading = true;
 
             axios.post('people/add', {
@@ -1967,7 +1966,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         deleteData: function deleteData(rowId, day, month) {
             var _this3 = this;
 
-            console.log('Row ID = ' + rowId + ' || Day = ' + day + ' || Month = ' + (month + 1));
             this.isLoading = true;
 
             axios.post('people/delete', {

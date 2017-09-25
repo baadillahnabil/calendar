@@ -52,8 +52,12 @@ class PeopleController extends Controller
         $data = file($path); //file in to an array
         unset($data[$row_id]);
 
-        $new_data = implode('', $data);
-        file_put_contents(public_path($path), $new_data, LOCK_EX);
+        if (!$data) { // if data is empty, delete the file
+            unlink($path);
+        } else {
+            $new_data = implode('', $data);
+            file_put_contents(public_path($path), $new_data, LOCK_EX);
+        }
 
         return 'Data Deleted Successfully';
     }
