@@ -1,8 +1,8 @@
+import './bootstrap';
 import Buefy from 'buefy'
 import 'buefy/lib/buefy.css'
 import Vue from 'vue';
 import App from './app.vue';
-import './bootstrap';
 
 // Add external library
 Vue.use(Buefy);
