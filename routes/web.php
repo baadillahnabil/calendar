@@ -8,7 +8,3 @@ Route::prefix('people')->group(function () {
     Route::post('edit/', 'PeopleController@edit');
     Route::post('delete/', 'PeopleController@destroy');
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
